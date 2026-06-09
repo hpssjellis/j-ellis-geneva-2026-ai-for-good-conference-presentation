@@ -1,1 +1,544 @@
-waiting
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Maker100 Leaders Robotics — AI for Good Geneva 2026</title></head>
+<body>
+
+<h1>Maker100 Leaders: Robotics, ML &amp; IoT — A Global Six-School Pilot</h1>
+
+This presentation at <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html</a><br><br>
+The Github Repository is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">https://github.com/hpssjellis/maker100-leaders-robotics</a><br><br>
+
+Number of Slides: <input type="text" id="myCountLinks" size="6" value="16" >. List of seconds per slide: <input type="text" id="myCountMax" size="30" value="25,45,45,60,60,50,50,55,50,50,60,55,50,55,70,80" >   Can be a list of seconds example: 17, 20, 24, 20 The last number continues.
+<br><br>
+
+Choose the language: <div id="google_translate_element"></div>
+
+<script type="text/javascript">
+document.myVoiceVar = 7
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script><br>
+
+Then choose the Speaker: <Select id="mySelect01" onchange="{
+  document.getElementById('myVoiceNum').value =  this.value
+  document.getElementById('myNumberSpeak').click()
+}"></select><br>
+
+<div id="myDiv01">...</div>
+Voice number: <input id="myVoiceNum" type=number  style="width: 5em" value=3>
+<input id="myNumberSpeak" type="button" value="Speak!" onclick="{
+    let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name
+    document.getElementById('myDiv01').innerHTML =  myV
+    responsiveVoice.speak(document.getElementById('myMain').innerText, myV, {pitch: 1, rate: 1, volume : 1});
+}">
+
+<br><br>
+
+<h2>This section readers have programmed autoscroll</h2>
+
+<input type=button value="Jeremy Ellis Reading in English" onclick="{
+   document.getElementById('myCountMax').value = '25,45,45,60,60,50,50,55,50,50,60,55,50,55,70,80';
+   mySetup();
+   myAudio01 = new Audio('maker100-leaders-ellis.m4a');
+   myAudio01.play();
+   carousel();
+}">
+
+<br><br><br>
+QR code to this presentation <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">website</a><br>
+<img height="500" alt="QR code — scan to open presentation" src="qr-maker100-leaders.png" />
+<br><br><br>
+
+<div id="myNumSlides" style=" position:sticky; top:0px; left:20px; height:25px; "> ...</div>  <br>
+
+<div id="myStick"  style=" position:sticky; top:25px; display:inline; ">
+
+<input type=button value="Start-No-Sound" onclick="{
+   mySetup()
+   carousel();
+}">
+
+<input type=button value="Rewind" onclick="{
+   myIndex = 0;
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+}">
+
+<input type=button value="-" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   myIndex -= 1;
+   window.location.href='#'+myIndex;
+}">
+
+<input type=button value="+" onclick="{
+  clearInterval(myLooper);
+  clearInterval(myCounting);
+  myIndex += 1;
+  window.location.href='#'+myIndex;
+}">
+
+<input type=button value="Back" onclick="{
+   myIndex = myIndex - 2;
+   if (myIndex <= 0){myIndex=0};
+   myNext();
+}">
+
+<input type=button value="Next" onclick="{
+   myNext();
+}">
+
+<input id="myPause" type=button value="Pause" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (this.value == 'Pause'){
+       this.value = 'Play / Pause';
+       if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+   } else {
+     resumeCarousel();
+     this.value = 'Pause';
+     if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+         myAudio01.play();
+      }
+   }
+}">
+
+<input type=button value="Hide" onclick="{
+   document.getElementById('myStick').style.display = 'none';
+}">
+
+<input type=button value="TOP" onclick="{
+   window.location.href='#top';
+}">
+
+<button onclick="closeAllDetails()">Close All</button>
+<button onclick="openAllDetails()">Open All</button>
+
+</div>
+
+
+<div id="myMain">
+
+
+<!-- ACT I: THE HOOK  Slides 1-3 -->
+
+<h3><a name="1" href="#1">1</a> Six Schools. Six Countries. $300 per Student.</h3>
+<h2>Maker100 Leaders: Robotics, ML &amp; IoT — A Global Pilot</h2>
+
+<img height="500" alt="Bold graphic showing: 6 schools, 6 countries, 3-30 students per school, ~$300 per student hardware cost, MIT licensed, no fees, no subscriptions." src="a01-six-schools.png" />
+
+<br><br><details open><summary><b>No introduction. Just the mission.</b></summary>
+I need exactly six schools — six different countries — to pilot this course next year.
+
+Three to thirty students each. Hardware costs about $300 per student, bought directly by your school. I make nothing from it.
+
+One year of data. Then we come back here and unlock serious funding to scale this globally.
+
+If you want your school to be one of those six — watch closely.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="2" href="#2">2</a> A Proven Course Looking for a Global Stage</h3>
+<h2>Nearly a decade of classroom testing. Two hardware generations. Two arXiv papers.</h2>
+
+<img height="500" alt="Timeline image: Arduino Portenta H7 era transitioning to XIAO ESP32-S3 era. Two arXiv paper badges: 2604.23012 and 2604.22834. GitHub logo. MIT license badge. 2026 class result: 45 of 53 assignments solved independently." src="a02-proven-course.png" />
+
+<br><br><details open><summary><b>This is not a prototype.</b></summary>
+This course has been running in a real BC high school for nearly a decade, across two full hardware generations.
+
+The tools are documented in two arXiv preprints. The curriculum is on GitHub — MIT-licensed, free, no subscriptions.
+
+In my 2026 class, students solved 45 of 53 assignments on their own. That is the target for pilot schools.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="3" href="#3">3</a> Most Students Use AI. These Students Build It.</h3>
+<h2>From consumer to creator — that is the shift this course makes.</h2>
+
+<img height="500" alt="Split image: left side shows a student passively using an AI chatbot on a phone. Right side shows a student holding a microcontroller with a live vision model running on-device. Labels: USING AI vs BUILDING AI. Pipeline shown: sensor data, browser training, on-device inference." src="a03-use-vs-build.png" />
+
+<br><br><details open><summary><b>Consumers vs. builders.</b></summary>
+Most students only ever use AI — they prompt it, pay for it, and trust whatever it outputs.
+
+Maker100 students collect their own data, train their own models in a browser, and deploy them onto real hardware.
+
+They use industry tools like Edge Impulse and SenseCraft — and they understand the full open pipeline underneath. No black boxes.
+</details>
+
+<br><br><br><br><br>
+<hr>
+
+
+<!-- ACT II: DEMO 1  Slides 4-5 -->
+
+<h3><a name="4" href="#4">4</a> Demo 1: Local AI — No Cloud. No WiFi. Total Privacy.</h3>
+<h2>A Gemma 4 LLM running entirely in your browser. Right now. Offline.</h2>
+
+<img height="500" alt="Screenshot of local-gemma4-pwa in a browser tab. Network disconnected indicator visible. LLM chat window showing a question answered instantly. URL: webmcu-ai.github.io/local-gemma4-pwa. Labels: No internet. No cloud. No subscription. Installs once as a PWA." src="a04-local-llm.png" />
+
+<br><br><details open><summary><b>Watch: network unplugged. Intelligence stays on the machine.</b></summary>
+This is the local Gemma 4 PWA — running entirely in this browser, completely offline.
+
+No internet. No subscription. It installs once and works forever, anywhere.
+
+Why send your students' data to cloud monopolies when the browser in front of them can do this locally?
+
+Available free today: webmcu-ai.github.io/local-gemma4-pwa
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="5" href="#5">5</a> Why This Matters: Sovereign AI for Every School</h3>
+<h2>Cloud = a subscription tax. Local = infrastructure you own.</h2>
+
+<img height="500" alt="World map with Global South regions highlighted. Two tracks shown side by side: Track 1 — reliable internet, use any cloud LLM. Track 2 — limited internet, install local Gemma 4 PWA once. Both tracks converge on the same course outcomes. Labels: one curriculum, six countries, no connectivity prerequisite." src="a05-sovereign-ai.png" />
+
+<br><br><details open><summary><b>One curriculum. Works everywhere.</b></summary>
+Students with good internet use ChatGPT, Gemini, Claude — whatever they prefer.
+
+Students with no reliable internet install the local PWA once and are never blocked.
+
+The course only needs internet for initial setup and cloud ML training runs. A shared school connection is enough.
+
+One curriculum. Six countries. No connectivity prerequisite.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT III: PEDAGOGY  Slides 6-10 -->
+
+<h3><a name="6" href="#6">6</a> The Analog Firewall</h3>
+<h2>Before touching a keyboard — write the code and draw the circuit by hand.</h2>
+
+<img height="500" alt="Side-by-side: handwritten pseudocode and hand-drawn circuit diagram with GPIOs labelled, next to a pristine undamaged XIAO ESP32-S3. Arrow from diagram to board labelled: Passes firewall = power on. Caption: Think before you type. Draw before you wire." src="a06-analog-firewall.png" />
+
+<br><br><details open><summary><b>Understand it first. Then build it.</b></summary>
+Every student writes pseudocode by hand and draws a full circuit diagram before touching hardware.
+
+A peer Lead or I check it. Pass the firewall — power goes on.
+
+This one gate cuts equipment damage dramatically and forces real understanding before action.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="7" href="#7">7</a> Lead Three: Cooperation Built Into the Grade</h3>
+<h2>The first student to solve a hard problem teaches three others. The ceiling rises together.</h2>
+
+<img height="500" alt="Completion chart grid: student names across the top, 53 assignments down the side. Cells coloured: grey for complete, gold star for Lead. Clustering of gold stars shows knowledge spreading. Caption: No bell curve. Multiple students can reach the top grade. Top grade rises when the class shares." src="a07-lead-three.png" />
+
+<br><br><details open><summary><b>No competition. Cooperation is structurally rewarded.</b></summary>
+Every student owns their own board and codebase — no hiding in group work.
+
+The first to crack a hard problem teaches three others. Those three teach more.
+
+There is no single top student. The class's collective grade ceiling rises when everyone shares. Hoarding hurts you.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="8" href="#8">8</a> Three Kinds of Leaders</h3>
+<h2>Users. Makers. Engineers. All three are essential.</h2>
+
+<img height="500" alt="Three column infographic. Users: informed decision-makers, community bridge, understand AI limits. Makers: builders and executors, local solutions, open-source everything. Engineers: first-principles thinkers, system vision, extend and mentor. All three pathways lead to the word LEADER at the bottom." src="a08-three-pathways.png" />
+
+<br><br><details open><summary><b>Every student finds their lane.</b></summary>
+Users understand AI deeply enough to lead without building it themselves.
+
+Makers thrive when good examples exist — they build, improve, and share solutions.
+
+Engineers love the hardest problems and create tools others cannot.
+
+No one is locked into one category. All three are how the world changes.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="9" href="#9">9</a> AI is Your 24/7 Teaching Assistant</h3>
+<h2>Use any LLM to debug, research, and understand — exactly like a real engineer.</h2>
+
+<img height="500" alt="Student screen showing local Gemma 4 PWA open beside Arduino IDE. Student has pasted a compile error into the LLM chat. LLM response explains the problem. Caption: LLMs are not cheating. They are the tool. The skill is knowing when the answer is wrong." src="a09-ai-scaffold.png" />
+
+<br><br><details open><summary><b>LLMs are not cheating. They are the tool.</b></summary>
+Students use any LLM they like — local or cloud — to debug code and understand concepts, exactly as working engineers do.
+
+One real constraint: LLMs struggle with brand-new hardware. The course GitHub README is the ground truth for that.
+
+The skill we are building is not finding answers. It is knowing when an answer is wrong.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="10" href="#10">10</a> What a Real Class Looks Like</h3>
+<h2>2026: 45 of 53 assignments solved independently. Asynchronous. Individual. Loud.</h2>
+
+<img height="500" alt="Classroom photo: students at individual benches with their own XIAO boards, some wiring, some coding, one student leaning over to show another. Completion chart on the wall. Caption: Staggered progress is a feature. You never need 30 of the same sensor at once." src="a10-classroom.png" />
+
+<br><br><details open><summary><b>Messy, loud, and productive — by design.</b></summary>
+Students work asynchronously. Different students hit different milestones at different times — which means you never need thirty of any expensive sensor simultaneously.
+
+The completion chart is on the wall. Everyone can see who has earned a Lead marker.
+
+The local teacher runs the room. My role is to unblock specific problems at the right moments — not be a remote co-teacher.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT IV: DEMO 2  Slides 11-13 -->
+
+<h3><a name="11" href="#11">11</a> Demo 2: Browser to Device — The webMCU-AI Pipeline</h3>
+<h2>Train a vision model in the browser. Compile it. Push it to the chip. Done.</h2>
+
+<img height="500" alt="Four-step pipeline diagram: Step 1 — collect image data in browser. Step 2 — train CNN with live loss curve. Step 3 — compile to firmware. Step 4 — push over WebSerial to XIAO device. Device shown running inference standalone. Labels: No TensorFlow. No cloud compiler. No installation. arXiv 2604.23012 and 2604.22834." src="a11-webmcu-demo.png" />
+
+<br><br><details open><summary><b>The whole pipeline in under two minutes. Live.</b></summary>
+No installation. No TensorFlow. No cloud.
+
+We collect images, train a neural network, compile it, and push it over WebSerial to this device — all from the browser.
+
+The firmware is raw C++ every student can read and modify. Every step is transparent. They own the entire stack.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="12" href="#12">12</a> The Hardware Kit</h3>
+<h2>~$300 per student. Fits in a lunchbox. The instructor gets zero margin.</h2>
+
+<img height="500" alt="Annotated flat-lay of the full XIAO ESP32-S3 ML Kit: microcontroller, camera, microphone, sensors (flex, joystick, temp, light, sound, vibration, IR), actuators (servo, stepper, DC motors, OLED), LiDAR, breadboard, wires. Price callout: ~$300 per student. ~$183 per student in a 12-person class once shared items spread. Full price list URL shown." src="a12-hardware-kit.png" />
+
+<br><br><details open><summary><b>Everything a student needs to build real AI. In a lunchbox.</b></summary>
+The core is the XIAO ESP32-S3 Sense — fingertip-sized, with camera, microphone, WiFi, and enough compute for on-device ML.
+
+Full kit fits in the space of a hardcover novel. One labelled bin per student. One shared tool bin. That is the entire storage system.
+
+Budget 15 to 30 percent board replacement per year. Breaking things is part of the learning.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="13" href="#13">13</a> Industry Tools + Open Pipeline: Both, Always</h3>
+<h2>Edge Impulse and SenseCraft for the resume. webMCU-AI for the understanding.</h2>
+
+<img height="500" alt="Two-column comparison table. Left column: Cloud tools — Edge Impulse, SenseCraft AI — employer-recognized, industry standard, requires internet and subscription. Right column: Open tools — webmcu-ai, local-gemma4-pwa — sovereign, offline-capable, fully transparent, free. Bottom row: A Maker100 graduate can work in either world." src="a13-cloud-plus-sovereign.png" />
+
+<br><br><details open><summary><b>One without the other is incomplete.</b></summary>
+Cloud tools are what employers recognise. Students learn them.
+
+The open pipeline is what builds real understanding. Students learn that too.
+
+A graduate who only knows cloud tools is dependent on a vendor. A graduate who knows both can work anywhere — with or without internet, with or without a budget.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT V: THE PITCH  Slides 14-16 -->
+
+<h3><a name="14" href="#14">14</a> Two Cohorts. One Question. One Year.</h3>
+<h2>How much expert support does a new school actually need?</h2>
+
+<img height="500" alt="Table with two rows. Row 1: Passionate Generalist — 3 schools, educator completes every assignment alongside students, 3 zoom consultations at setup, plateau, and ML integration. Row 2: Technology Specialist — 3 schools, experienced Arduino educator, GitHub only, no structured support. Both rows end with: One year, then all schools reconvene with data." src="a14-pilot-structure.png" />
+
+<br><br><details open><summary><b>The pilot is designed to answer the scaling question.</b></summary>
+Three Passionate Generalist schools — educators who commit to doing every assignment with their students. They get three zoom check-ins with me across the year.
+
+Three Technology Specialist schools — experienced educators who run independently from the GitHub alone.
+
+If generalist schools succeed with three calls, this model scales globally with minimal instructor time. Either outcome gives us real data.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="15" href="#15">15</a> Three Ways to Make This Happen</h3>
+<h2>$300 per student. For the right partner — a rounding error.</h2>
+
+<img height="500" alt="Three large numbered paths. 1: School or district budget — one budget line, full year of AI engineering education. 2: Sponsor a cohort — cover hardware for one partner school, zero overhead, funds go directly to students. 3: Student-led fundraising — students pitch local businesses and community leaders, advocacy is part of the curriculum. Bottom: Contact card — jeremy.ellis@sd75.bc.ca — github.com/hpssjellis." src="a15-three-paths.png" />
+
+<br><br><details open><summary><b>The ask is simple. The impact is not.</b></summary>
+The curriculum is free. The tools are free. The only cost is hardware — $300 per student, paid directly to the supplier.
+
+Schools can budget it, sponsors can cover it for a partner school, or students can fundraise it themselves.
+
+You can make this happen for a school today, right here at this conference. Who is coming with me?
+</details>
+
+<br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="16" href="#16">16</a> See You Next Year — With Data.</h3>
+<h2>Six schools. Six countries. One year. Then we scale.</h2>
+
+<img height="500" alt="Split visual. Left: six school icons each with a different country flag. Right: a growth curve labelled — Year 1: pilot data. Year 2: funding unlocked. Year 3: scale. Bottom strip with all key links: github.com/hpssjellis/maker100-leaders-robotics, webmcu-ai.github.io, arXiv 2604.23012, arXiv 2604.22834, jeremy.ellis@sd75.bc.ca." src="a16-meet-again.png" />
+
+<br><br><details open><summary><b>One year. Real data. Then everything changes.</b></summary>
+Six schools. Six countries. Students building real AI on real hardware for one full year.
+
+At the end — we know what it actually takes to run this globally. That evidence unlocks the next hundred schools.
+
+The curriculum is MIT-licensed at github.com/hpssjellis/maker100-leaders-robotics.
+
+Find me after the session. Let's get your school on the list.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+</div>
+<a href="#top">Top of page</a>
+
+<h2>By Jeremy Ellis — <a href="https://ca.linkedin.com/in/jeremy-ellis-4237a9bb">LinkedIn: jeremy-ellis-4237a9bb</a> — Use at your own risk!</h2>
+<h2>GitHub: <a href="https://github.com/hpssjellis">https://github.com/hpssjellis</a></h2>
+<h2>Course: <a href="https://github.com/hpssjellis/maker100-leaders-robotics">maker100-leaders-robotics</a> &nbsp;|&nbsp; arXiv: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a></h2>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+<script>
+ let myIndex = 1;
+ let myLooper = 0;
+ let myCounting = 0;
+ let myMainNum = '10,10';
+ let myMainNum2 = '10,10';
+ let myMainNumLast = 20;
+ let myCountUp = 0;
+ let xSlide = 3;
+ let myAudio01 = new Audio();
+ document.body.style.backgroundColor = "skyblue";
+
+ let myArray = [1,2,3,13,14,16,18,2223,24,29,30,34,37,39,42,43,49,54,57]
+ let myVoiceObject = responsiveVoice.getVoices()
+ let myTemp = ''
+ for (let myLoop=0; myLoop < 50; myLoop++ ){
+    if ( myArray.includes(myLoop) ) {
+       myTemp += '<option value=\''+myLoop + '\'>' + myLoop + ' : ' + myVoiceObject[myLoop].name + '</option>'
+    }
+ }
+ document.getElementById('mySelect01').innerHTML =  myTemp
+
+
+function mySetup(){
+   document.getElementById('myStick').style.display = 'none';
+   xSlide  = document.getElementById('myCountLinks').value;
+   myMainNum = document.getElementById('myCountMax').value.split(',');
+   myMainNumLast = myMainNum[0]
+   console.log('myMainNum')
+   console.log(myMainNum)
+   console.log('myIndex, myMainNumLast, myMainNum[myIndex]')
+   myAudio01.pause();
+   myAudio01.currentTime = 0;
+   myIndex = 0;
+   clearInterval(myLooper);
+   myCountUp = -1;
+}
+
+function carousel() {
+  clearInterval(myCounting);
+  myCountUp = -1;
+  var i;
+  myIndex++;
+  if (myIndex > xSlide) {myIndex = xSlide};
+  window.location.href='#'+myIndex;
+  if (Number.isInteger( parseInt(myMainNum[myIndex-1]) ) ) {
+     myMainNumLast = parseInt(myMainNum[myIndex-1])
+  }
+  console.log(myIndex +', '+ myMainNumLast +', '+  myMainNum[myIndex-1])
+  myCountDown();
+  myCounting = setInterval(myCountDown, 1000);
+  myLooper = setTimeout(carousel, myMainNumLast*1000);
+}
+
+function resumeCarousel() {
+    myCounting = setInterval(myCountDown, 1000);
+    var remainingTime = (myMainNumLast - myCountUp) * 1000;
+    myLooper = setTimeout(carousel, remainingTime);
+}
+
+function myCountDown(){
+  myCountUp++;
+  if (myCountUp >= myMainNumLast ) {
+    myCountUp = myMainNumLast;
+  }
+  if (myIndex >= xSlide && myMainNumLast == myCountUp){
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ALL DONE <input type=button value="Show"  style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+     clearInterval(myCounting);
+     clearInterval(myLooper);
+  }
+  else {
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ${myMainNumLast-myCountUp} seconds remaining <input type=button value="Show" style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+  }
+}
+
+function myNext(){
+    var slideCountString = document.getElementById('myCountLinks').value;
+    xSlide = parseInt(slideCountString.trim(), 10);
+    var durationString = document.getElementById('myCountMax').value;
+    myMainNum = durationString.split(',')
+        .map(function(item) {
+            return parseInt(item.trim(), 10);
+        });
+    clearInterval(myLooper);
+    carousel();
+}
+
+function closeAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = false;
+    });
+}
+
+function openAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = true;
+    });
+}
+</script>
+
+</body>
+</html>
