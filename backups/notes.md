@@ -11,7 +11,7 @@
 "Let me start with a question that I believe every leader, every educator, and every student needs to answer: **Should leaders of the future have a grassroots understanding of Artificial Intelligence?**"
 
 **Slide 3: The Reality Check**
-"AI isn't science fiction anymore. It’s reshaping policy, jobs, and our daily lives. But here is the critical gap: **Most people are not just *using* AI; they are not *building* it.** Ignorance in this space is a vulnerability. And our current education system is failing to equip our students with this foundational literacy."
+"AI isn't science fiction anymore. It’s reshaping policy, jobs, and our daily lives. But here is the critical gap: **Most people are just *using* AI; they are not *building* anything physical with it.** Ignorance in this space is a vulnerability. And our current education system is failing to equip our students with this foundational literacy."
 
 **Slide 4: The Thesis Statement**
 "My mission is simple: We are moving beyond consumption. We are moving toward **creation.** We are moving from being AI consumers to becoming AI architects. And that is what Maker100 Leaders Robotics is about."
@@ -19,7 +19,7 @@
 ### **Section 2: The Credibility & The Vision**
 
 **Slide 5: Who Am I? (Briefly)**
-"Why should you listen to me? I’m not an academic, and I’m not just an engineer. I’m a Canadian high school teacher who looked at neural networks in the 90s and realized I needed to understand them to teach them. For the last decade, I’ve been an expert in two colliding fields: **WebAI and TinyML.**"
+"Why should you listen to me? I’m not an academic, and I’m not even an engineer. I’m a Canadian high school teacher who looked at neural networks in the 90s and realized I needed to understand them to teach them. For the last decade, I’ve been an expert in two colliding fields: **WebAI and TinyML.**"
 
 **Slide 6: The Core Philosophy**
 "This brings me to the heart of our approach: **LLMs are not cheating tools; they are your teacher assistants.** They are the most powerful, accessible teaching assistants ever created. They allow students to ask the right questions, evaluate the answers, and learn how to prompt the machine—which is the most important AI skill of the next decade."
