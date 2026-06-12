@@ -55,7 +55,7 @@
 "How do we ensure everyone succeeds? We use a structure built on collaboration, not competition. We use **'Lead Three'**—the first student to solve a hard problem teaches three others. This builds collective knowledge, not hoarding."
 
 **Slide 15: The Student Spectrum**
-"We cater to three essential student types: **Users** who gain big-picture leadership; **Makers** who execute and build; and **Engineers** who love the friction and first principles. Every student finds their path to leadership here."
+"We cater to three essential student types: **Users** who gain big-picture leadership; **Makers** who execute and build; and **Engineers** who love the friction and first principles. Every student has thepotential to take this knowledge, apply it outwardly andd dig deeper for higher understanding.
 
 ### **Section 5: The Call to Action (The Ask)**
 
