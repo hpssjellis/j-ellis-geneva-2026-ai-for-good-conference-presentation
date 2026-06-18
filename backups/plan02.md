@@ -1,6 +1,7 @@
-Topics:
+
 I am Jeremy Ellis, founder of the GitHub organization webmcu-ai, and I help run the Show and Tell for AIEng4D, where Global South university students present their TinyML 
 and Edge AI machine learning projects online.
+
 I have taught technology for over 30 years in BC, Canada, and I am presenting to you a pilot project to bring my student-led Robotics course to the Global South. 
 During this hands-on, dopamine-replacement course, students solve 40 to 60 robotics assignments, machine learning, sensors, actuators, IoT problems, and teach others 
 their solutions. No full lectures. LLMs are lab assistants. Collaboration is grade-rewarded, but we don't do group work until the very end of the course. An Analog Firewall 
