@@ -62,7 +62,18 @@ on the microcontroller. Most Engineers will tell you that TensorFlowLite or pyto
 is too advanced, offsite you train and just put theinference on the machine, but I am not an engineer, I am a decade long expert at webAI and tinyML, with LLM assistance
 I got a the entire process on the XIAO ML kit, from basic principals no TFLITE. 
 
+needs to mention the xiao ml kit and the xiao esp32s3 sense, and why the cheap price for the bsae mcu is important.
+
 Demo webmcu-ai
+
+What did you just watch: The ability to fully do ML on a micro-controller. Why, because leaders need to know what is happening to think beyond the clouds. The privacy alone
+is impressive, but I believe a few students will look at that under 2000 lines of code and truly understand how some simple ML is done. Not only can we do Vision Classification, with the fancy webSerial assisted page, but we also have the code for visionobejct xy detection (FOMO), vision Anamoly detection, vision Regression (distance size) sound classification and motion classification. I like that we don't yet have webserial training pages since that adds a lot of complexity to the firmware that is not really needed. I probably will make those webSerial pages just the first one took 147 versions, so it might take some time.
+
+You have listened to the Maker100 Leaders Robotics, which is difficult, but allows students to grow their pre-engineering skills and leadership skills while working hands on with 
+robotic analysis
+
+
+
 
 
 
