@@ -10,8 +10,8 @@ The entire course is designed for hands-on learning, poor internet, and low cost
 
 Throughout my teaching career, I have had students solve technology issues as a class. I don't teach pre-engineers, students who do well in math and physics and love 
 building things, they teach me. I also don't teach leaders, students who look outward while digging deeper, I put them in situations to do what leaders do. With that in mind:
-Maker100 Leaders Robotics needs the leaders in this room to calculate the cost to run this pilot and find the funding. You are in one of the best places on the planet to 
-raise funding. For your cost calculation you need at least 3 pre-engineers. Pick a number of students from 3 to 30, calculate hardware from supplier costs, 
+Maker100 Leaders Robotics needs the leaders in this room to calculate the cost to run this pilot at their school and find the funding. You are in one of the best places on the planet to 
+raise funding. For your cost calculation you need at least 3 pre-engineers. Pick a number of students from 3 to 30 in grades 9-12, calculate hardware from supplier costs, which are 
 approximately $200 USD per student to start and $50 USD each year or semester for replacement parts. Yes, we break equipment. Once you have your number of students and the 
 years or semesters to run the program, calculate a final cost and solve the funding issue. That is not my job, but be aware of where the money is coming from.
 If your teacher wants to learn the technology and is willing to do every assignment, I will help three times during the first course: at the start for safety, 
