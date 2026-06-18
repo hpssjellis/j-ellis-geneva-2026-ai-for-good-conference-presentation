@@ -31,7 +31,7 @@ and they are responsible for helping three more. The class's highest mark, 90 to
 are complete, students do their Level 1 and Level 2 final projects. Level 1 is a course pass; Level 2 earns the higher mark. Multiple people are expected to reach the top grade. 
 I am fine with ten students all getting 100 percent, it hurts no one and massively improves pre-engineers' communication skills and the tone of the class.
 The class always starts with the Analog Firewall: code is summarized on paper before loading onto a microcontroller, circuit diagrams are drawn by hand and checked by a 
-Lead Three before wiring, and power is only connected after a second check. Students are encouraged to plan before they arrive.
+Lead Three before wiring, and power is only connected after a second check. Students are encouraged to plan what they are doing that day in class before they arrive.
 Leaders do the assignments and extend them, make them their own, dig deeper, think about applications. That balance between sheer volume of work and the massive real-world 
 applications of almost every assignment is the most powerful part of the course.
 The course is at github.com/hpssjellis/maker100-leaders-robotics, open source, free, dynamic, and updated as issues are found. It has links to the Maker100 curriculum, 
