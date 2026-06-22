@@ -2,14 +2,14 @@
 
 
 
-First, introduce the pilot project: “We’re launching a pilot for three to six schools in the global south to make this collaborative tech accessible to everyone.”
+“We’re launching a pilot for three to six schools in the global south to make this collaborative tech accessible to everyone.”
 
-Second, detail the accessibility: “With just two hundred dollars per student, we remove the barriers of expensive hardware and the need for electronic engineers, as the classroom becomes the educator.”
+“With just two hundred dollars per student, we remove the barriers of expensive hardware and the need for electronic engineers, as the classroom becomes the educator.”
 
-Third, highlight the analog firewall: “We use an analog firewall with pen and paper to make every design choice transparent and easily traceable.”
+“We use an analog firewall with pen and paper to make every design choice transparent and easily traceable.”
 
-Fourth, discuss evaluation: “Success is based on the final projects, encouraging group achievement and collaboration over competition.”
+“Success is based on the final projects, encouraging group achievement and collaboration over competition.”
 
-Fifth, issue your funding warning: “Student leaders, choose your partners wisely to ensure the pilot remains independent and aligned with our local mission.”
+“Student leaders, choose your partners wisely to ensure the pilot remains independent and aligned with our local mission.”
 
-Finally, your conclusion: “Let’s build the future of AI together, starting in the classroom today.”
+“Let’s build the future of AI together, starting in the classroom today.”
