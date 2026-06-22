@@ -22,7 +22,7 @@ The course features a browser-native Sovereign AI Engine (webmcu-ai) that runs c
 
 ---
 
-### OPENING, THE RED WIRE STORY
+### THE RED WIRE STORY
 
 I want to start with a story from my robotics class.
 
