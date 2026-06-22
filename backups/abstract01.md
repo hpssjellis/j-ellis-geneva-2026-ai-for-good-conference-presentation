@@ -2,7 +2,7 @@ Session Title:
 Maker100 Leaders Robotics: Decentralized Edge AI Education for Global Technological Empowerment
 
 Session Description / Abstract:  
-How can we equip youth globally—particularly in underserved regions and the Global South, to become active creators rather than passive consumers of artificial intelligence? This keynote presents an open-source, zero-lecture pedagogical framework that delivers low-cost, high-impact Edge AI and robotics education to the next generation of global innovators.
+How can we equip youth globally, particularly in underserved regions and the Global South, to become active creators rather than passive consumers of artificial intelligence? This keynote presents an open-source, zero-lecture pedagogical framework that delivers low-cost, high-impact Edge AI and robotics education to the next generation of global innovators.
 
 Built on over three decades of educational experience, this turnkey curriculum pairs hands-on, hardware-based challenges with accessible, microcontrollers ($8-40 USD) to bridge the digital divide. By utilizing the browser-native Sovereign AI Engine (webmcu-ai), students learn to execute full machine learning pipelines, including vision, sound, and motion classification, completely on-device and also via WebSerial. Operating without the need for high-speed internet or cloud subscriptions, this framework offers a highly scalable, sustainable, and private solution that serves humanity by expanding equitable access to advanced STEM literacy.
 
