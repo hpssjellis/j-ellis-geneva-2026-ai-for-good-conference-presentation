@@ -27,7 +27,7 @@ Embedded within the course is the Sovereign AI Engine (webmcu-ai), a browser-nat
 
 I want to start with a story from my robotics class.
 
-A three-person team was falling apart over their final project, a robot arm with IoT sensors and a tiny vision ML loop. The leader was brilliant. The pre-engineer was meticulous. And yet the system kept failing, working one moment, collapsing the next.
+A three-person team was falling apart over their final project, a robot arm with IoT sensors and a tiny vision ML loop. The leader was capable. The pre-engineer was meticulous. And yet the system kept failing, working one moment, collapsing the next.
 
 Beside them stood the third student. Quiet. Barely passing the course.
 
