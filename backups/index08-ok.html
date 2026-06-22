@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Maker100 Leaders Robotics — AI for Good Geneva 2026</title></head>
+<body>
+
+<h1>Maker100 Leaders: Robotics, ML &amp; IoT — A Global Six-School Pilot</h1>
+
+This presentation at <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html</a><br><br>
+The Github Repository is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">https://github.com/hpssjellis/maker100-leaders-robotics</a><br><br>
+
+Number of Slides: <input type="text" id="myCountLinks" size="6" value="16" >. List of seconds per slide: <input type="text" id="myCountMax" size="30" value="30,60,90,90,120,90,90,90,90,90,90,90,90,100,120,120" >   Can be a list of seconds example: 17, 20, 24, 20 The last number continues.
+<br><br>
+
+Choose the language: <div id="google_translate_element"></div>
+
+<script type="text/javascript">
+document.myVoiceVar = 7
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script><br>
+
+Then choose the Speaker: <Select id="mySelect01" onchange="{
+  document.getElementById('myVoiceNum').value =  this.value
+  document.getElementById('myNumberSpeak').click()
+}"></select><br>
+
+<div id="myDiv01">...</div>
+Voice number: <input id="myVoiceNum" type=number  style="width: 5em" value=3>
+<input id="myNumberSpeak" type="button" value="Speak!" onclick="{
+    let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name
+    document.getElementById('myDiv01').innerHTML =  myV
+    responsiveVoice.speak(document.getElementById('myMain').innerText, myV, {pitch: 1, rate: 1, volume : 1});
+}">
+
+<br><br>
+
+<h2>This section readers have programmed autoscroll</h2>
+
+<input type=button value="Jeremy Ellis Reading in English" onclick="{
+   document.getElementById('myCountMax').value = '30,60,90,90,120,90,90,90,90,90,90,90,90,100,120,120';
+   mySetup();
+   myAudio01 = new Audio('maker100-leaders-ellis.m4a');
+   myAudio01.play();
+   carousel();
+}">
+
+<br><br><br>
+QR code to this presentation <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">website</a><br>
+<img height="500" alt="QR code — scan to open presentation" src="qr-maker100-leaders.png" />
+<br><br><br>
+
+<div id="myNumSlides" style=" position:sticky; top:0px; left:20px; height:25px; "> ...</div>  <br>
+
+<div id="myStick"  style=" position:sticky; top:25px; display:inline; ">
+
+<input type=button value="Start-No-Sound" onclick="{
+   mySetup()
+   carousel();
+}">
+
+<input type=button value="Rewind" onclick="{
+   myIndex = 0;
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+}">
+
+<input type=button value="-" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   myIndex -= 1;
+   window.location.href='#'+myIndex;
+}">
+
+<input type=button value="+" onclick="{
+  clearInterval(myLooper);
+  clearInterval(myCounting);
+  myIndex += 1;
+  window.location.href='#'+myIndex;
+}">
+
+<input type=button value="Back" onclick="{
+   myIndex = myIndex - 2;
+   if (myIndex <= 0){myIndex=0};
+   myNext();
+}">
+
+<input type=button value="Next" onclick="{
+   myNext();
+}">
+
+<input id="myPause" type=button value="Pause" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (this.value == 'Pause'){
+       this.value = 'Play / Pause';
+       if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+   } else {
+     resumeCarousel();
+     this.value = 'Pause';
+     if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+         myAudio01.play();
+      }
+   }
+}">
+
+<input type=button value="Hide" onclick="{
+   document.getElementById('myStick').style.display = 'none';
+}">
+
+<input type=button value="TOP" onclick="{
+   window.location.href='#top';
+}">
+
+<button onclick="closeAllDetails()">Close All</button>
+<button onclick="openAllDetails()">Open All</button>
+
+</div>
+
+
+<div id="myMain">
+
+
+<!-- ACT I: THE HOOK AND COST TRANSPARENCY  Slides 1-3  ~4 minutes -->
+
+<h3><a name="1" href="#1">1</a> Six Schools. Six Countries. $300 per Student.</h3>
+<h2>Maker100 Leaders: Robotics, ML &amp; IoT — A Global Pilot</h2>
+
+<img height="500" alt="Bold graphic: 6 Schools from 6 different countries. 3 to 30 students per school. Approximately $300 per student hardware cost." src="a01-six-schools.png" />
+
+<br><br><details open><summary><b>Walk out. Skip the introduction. Go straight to the mission and the numbers.</b></summary>
+I am here today with a very specific mission.
+
+I am looking for exactly six schools — from six different countries — to pilot the Maker100 Leaders Robotics course for the upcoming academic year.
+
+Three to thirty students per school. Let's talk numbers upfront so there are no surprises: the hardware cost is roughly $300 USD per student for the XIAO ML kit and all supporting components, purchased by your school directly from online suppliers.
+
+I make absolutely nothing from the hardware. But I only support the platform I have stress-tested for years in my own classroom.
+
+We are here to launch this pilot, gather hard undeniable student data over one full year, and stand back on a stage like this next year to unlock the significant financial support needed to scale this globally.
+
+If you want your school or organization to be one of those six pioneers — watch closely.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="2" href="#2">2</a> Nearly a Decade of Classroom Testing</h3>
+<h2>This is not a prototype. It is a proven course looking for a global stage.</h2>
+
+<img height="500" alt="Timeline: Arduino Portenta H7 generation to XIAO ESP32-S3 generation. Two arXiv papers. One living GitHub curriculum." src="./media/image02-xiao2.png" />
+
+<br><br><details open><summary><b>The course has already survived two full hardware generations. That adaptability is the point.</b></summary>
+This course has been running in a real secondary school classroom in British Columbia, Canada for nearly a decade.
+
+It has already successfully transitioned across two major microcontroller generations — from the Arduino Portenta H7 to the Seeed Studio XIAO ESP32-S3 — and every time a new board arrives, adapting to it is itself a core learning outcome.
+
+The underlying tools are documented in two peer-reviewed arXiv preprints: 2604.23012 and 2604.22834 — covering browser-based on-device neural network training and the WebSerial firmware deployment pipeline.
+
+The curriculum lives openly on GitHub. The course is MIT-licensed. No fees. No subscriptions. No vendor lock-in.
+
+In my 2026 class, students collectively solved 45 of 53 assignments independently. Eight required me to demonstrate. One student on a Level 2 final project needed sustained support. Several needed redirection rather than technical help.
+
+That distribution is the target outcome for pilot schools.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="3" href="#3">3</a> Most Students Only Ever Use AI. These Students Build It.</h3>
+<h2>The gap between using AI and understanding it is exactly where this course lives.</h2>
+
+<img height="500" alt="Split image: student using a phone with an AI chatbot on the left. Student holding a microcontroller with a trained vision model running on-device on the right." src="a03-use-vs-build.png" />
+
+<br><br><details open><summary><b>AI is reshaping every industry. This pilot offers something different: students who own the full pipeline.</b></summary>
+Artificial intelligence is reshaping every industry.
+
+But most students — and most schools — only ever interact with AI as consumers. They use it. They prompt it. They pay for access to it.
+
+This pilot offers something genuinely different.
+
+Students in Maker100 Leaders collect their own sensor data, train neural networks directly in a browser, and deploy working AI models onto physical microcontrollers — all the way from raw data to on-device inference.
+
+They learn both cloud-based industry tools — Edge Impulse and SenseCraft AI, the same platforms used by working engineers globally — and fully sovereign, browser-based, open-source on-device training tools developed specifically for this course.
+
+They own the entire pipeline. No black boxes. Every step can be examined, modified, and understood.
+
+That is what makes a builder. That is what makes a leader.
+</details>
+
+<br><br><br><br><br>
+<hr>
+
+
+<!-- ACT II: DEMO 1 LOCAL AI  Slides 4-5  ~5 minutes -->
+
+<h3><a name="4" href="#4">4</a> Demo 1: Local AI — No Cloud. No WiFi. Total Privacy.</h3>
+<h2>A local Gemma 4 LLM running entirely in the browser. Right now. Offline.</h2>
+
+<img height="500" alt="Screenshot: local-gemma4-pwa running offline in a browser. Network cable visibly unplugged. LLM answering a question instantly with no internet." src="a04-local-llm.png" />
+
+<br><br><details open><summary><b>Pull the network plug. The intelligence stays on the machine.</b></summary>
+First, let's look at how we interact with intelligence today.
+
+This is the local Gemma 4 PWA — a progressive web app running entirely in this browser. No internet. No cloud server. No subscription. It installs once, and from that point forward it answers questions, debugs code, and scaffolds research completely offline.
+
+Watch: I disconnect from the network right now. The model keeps running.
+
+Why are we surrendering student privacy and institutional data to giant cloud monopolies — when the browser on the machine sitting in front of your students can do this locally?
+
+For students in under-resourced schools with limited or no reliable internet, this is not a workaround. It is a designed redundancy. No student in this course is expected to work without AI assistance. We have just eliminated the internet as a dependency.
+
+The PWA is free, open-source, and available today at: webmcu-ai.github.io/local-gemma4-pwa
+
+This is Phase 1 of true digital autonomy.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="5" href="#5">5</a> Why Sovereign AI Matters for the Global South</h3>
+<h2>Cloud subscriptions are a tax. Local intelligence is infrastructure.</h2>
+
+<img height="500" alt="World map highlighting Global South regions with annotations: unreliable internet, limited budgets, student data privacy concerns, no vendor lock-in required." src="a05-sovereign-ai.png" />
+
+<br><br><details open><summary><b>This is not an academic preference. For many schools, cloud dependency is a structural barrier.</b></summary>
+For schools in high-income countries with reliable broadband, cloud AI tools are a convenience.
+
+For schools in the Global South — with intermittent connectivity, constrained budgets, and legitimate concerns about where student data goes — cloud dependency is a structural barrier to participating in the AI revolution at all.
+
+The Maker100 Leaders curriculum is built to function across the full connectivity spectrum.
+
+Students with reliable internet use any LLM they prefer — ChatGPT, Gemini, Claude — exactly as working engineers do.
+
+Students with limited or no connectivity install the local Gemma 4 PWA once and are never blocked again.
+
+The course itself needs internet only for initial firmware setup, cloud ML training runs on Edge Impulse and SenseCraft, and software updates. A school-level shared connection is adequate. Students do not need individual high-bandwidth access.
+
+One curriculum. Six countries. No connectivity prerequisite.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT III: THE PEDAGOGY  Slides 6-10  ~8 minutes -->
+
+<h3><a name="6" href="#6">6</a> The Analog Firewall</h3>
+<h2>Before any student touches a keyboard or connects power — they write it out by hand.</h2>
+
+<img height="500" alt="Side by side: a handwritten student pseudocode sketch and circuit diagram next to a pristine unfried XIAO ESP32-S3 microcontroller." src="a06-analog-firewall.png" />
+
+<br><br><details open><summary><b>This single gate reduces equipment damage and forces genuine understanding before action.</b></summary>
+Before a student ever touches a keyboard or plugs in power, they must write their pseudocode by hand and draw their complete circuit diagram on paper — every GPIO, every sensor, every actuator, power and ground clearly labelled.
+
+A peer Lead student, or I, check it. If it passes the Analog Firewall, they get to power it up.
+
+This is not a punishment. It is the same reason engineers write tests before deployment: to make errors survivable.
+
+Students must think before they type. Explain before they deploy. Draw before they wire.
+
+The Analog Firewall is the gate between understanding and action. It is the most important single protocol in the course — and the one that makes it possible for a non-specialist educator to run a functioning embedded systems lab without destroying equipment.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="7" href="#7">7</a> Zero Competition. Individual Ownership. Lead Three.</h3>
+<h2>Multiple students can receive the top grade. The ceiling rises when the class works together.</h2>
+
+<img height="500" alt="Completion chart grid: students across the top, assignments down the side. Cells marked Checked or Lead. Many Lead markers clustered around the hardest assignments." src="a07-lead-three.png" />
+
+<br><br><details open><summary><b>Knowledge hoarding is structurally impossible. Cooperation is built into the grade ceiling.</b></summary>
+Each student works with their own board and their own codebase. No shared repositories. No task-splitting. Completing 40 to 60 individual assignments means every student who finishes has personally navigated the full embedded ML pipeline.
+
+Grading is explicitly non-competitive. I do not use a bell curve.
+
+The Lead Three norm: the first student to solve a genuinely difficult problem teaches three others — including verifying their Analog Firewall diagram. Those three teach more. Knowledge spreads laterally across the class.
+
+A student's top grade — and the class's collective top grade — is partly determined by how many peers they have led through the completion chart.
+
+Cooperation is not encouraged. It is structurally rewarded at the ceiling.
+
+A class that shares solutions broadly gets a higher collective grade than a class where one student races ahead and guards their work. These assignments are genuinely dopamine-rewarding for students who love a challenge: minimal instructions, basic working code, teach others.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="8" href="#8">8</a> Users, Makers, and Engineers</h3>
+<h2>Three pathways. All three are essential. None is a failure.</h2>
+
+<img height="500" alt="Three column graphic: Users — informed appreciation and big picture leadership. Makers — execution, local solutions, open-source. Engineers — first principles, system vision, mentorship." src="a08-three-pathways.png" />
+
+<br><br><details open><summary><b>Prior technical experience is not a prerequisite. Persistence, curiosity, and motivation are the true drivers.</b></summary>
+Through the Analog Firewall and the assignment progression, students find their identity.
+
+Users often find the technical portions challenging. They may not enjoy constant debugging and wiring. But they gain a deeply-informed understanding of what AI and robotics can and cannot do. As leaders they connect technology to real-world problems, advocate for responsible adoption, and bridge technical teams with community needs. Unlike the rest of society, they make their choices knowing the full range of options exists.
+
+Makers thrive when proven designs and working examples are available. They execute. They build. They modify and improve. They lead by producing fully-solved, documented, open-sourced solutions so peers never remain stuck. They find cheap local solutions using sovereign private AI.
+
+Engineers love the friction. They explore beyond assignment requirements, derive solutions from first principles, and create new tools. As leaders they anticipate systemic bottlenecks before they manifest, mentor others, and see how these tools can transform their school, community, and the world.
+
+Students are not locked into a single category. The goal is not to turn every student into an engineer. The goal is to help every student find a meaningful way to contribute to an AI-enabled future.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="9" href="#9">9</a> AI as Scaffold, Not Shortcut</h3>
+<h2>LLMs are the always-available teaching assistant no school budget can hire.</h2>
+
+<img height="500" alt="Student at a computer with local Gemma 4 PWA open alongside Arduino IDE. Annotation: debugging firmware with local LLM, no internet required." src="a09-ai-scaffold.png" />
+
+<br><br><details open><summary><b>The goal is students who know how to ask the right questions and evaluate the answers they receive.</b></summary>
+LLMs are not treated as academic dishonesty in this course. They are treated exactly as a working embedded ML engineer treats them: as debuggers, research assistants, and explainers.
+
+Students are encouraged to use any LLM they prefer — local or cloud — to help understand the GitHub course assignments.
+
+There is a real constraint, and students learn it fast. A large language model cannot reliably solve hardware-specific issues on a board released within the last year. This is where the course GitHub README becomes load-bearing infrastructure: a living document of code skeletons, hardware-specific gotchas, and failure modes, updated continuously as new problems are discovered.
+
+Students use the README as ground truth. They use the LLM as their research and reflection layer.
+
+The goal is not students who can answer questions without help. The goal is students who know how to ask the right questions, evaluate the answers they receive, and recognize when the machine is wrong.
+
+That is the most important AI skill of the next decade.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="10" href="#10">10</a> What This Looks Like in a Real Classroom</h3>
+<h2>In 2026: 45 of 53 assignments solved independently. 8 required the instructor. One final project needed sustained support.</h2>
+
+<img height="500" alt="Classroom photo: students at individual stations each with their own XIAO ESP32-S3 board. Completion chart visible on wall. Mixed activity: some wiring, some coding, one student teaching another at their bench." src="a10-classroom.png" />
+
+<br><br><details open><summary><b>That distribution — mostly independent, occasionally unblocked — is exactly the target outcome for pilot schools.</b></summary>
+Here is what the course actually looks like when it runs.
+
+Students work asynchronously. They hit different milestones at different times. This is a feature, not a bug: a full class set of any expensive sensor is rarely needed simultaneously. Staggered progress solves a hardware budget problem.
+
+The completion chart — a grid mapping every student against every assignment — is visible in the room. Cells are marked Checked or Lead. When a Lead marker appears on a hard assignment, the student who earned it goes to work teaching three others.
+
+In my 2026 class: 45 of 53 assignments solved independently. Eight required me to demonstrate and explain the failure modes. Several students needed redirection on their final project direction rather than technical help. One student on a Level 2 project needed sustained completion support.
+
+The local educator runs the room. My role — and the role of the three structured consultations for Generalist schools — is to unblock specific technical barriers at the right moments.
+
+Not a remote co-teacher. An occasional expert unlocker.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT IV: DEMO 2 webMCU-AI  Slides 11-13  ~6 minutes -->
+
+<h3><a name="11" href="#11">11</a> Demo 2: Browser to Silicon — The webMCU-AI Pipeline</h3>
+<h2>No TensorFlow. No cloud compiler. No black boxes. Pure open pipeline.</h2>
+
+<img height="500" alt="Screenshot: webmcu-ai browser training page open with WebSerial connected. Live training loss curve updating. XIAO ESP32-S3 device visible on desk beside the laptop." src="a11-webmcu-demo.png" />
+
+<br><br><details open><summary><b>Train a vision model in the browser, compile it, push it over WebSerial to the device. The whole pipeline in under two minutes.</b></summary>
+Now let's bridge theory and reality.
+
+This is the exact work documented in my two arXiv preprints.
+
+Watch what happens: we open the browser-based training page from webmcu-ai.github.io. No installation. No TensorFlow environment. No cloud compiler.
+
+We collect image data directly in the browser, train a convolutional neural network — hand-coded forward and backward passes, no external ML library — and compile the result.
+
+Then we push it over WebSerial directly to this physical device.
+
+Look at the device now. It is running a fully trained vision model. Zero cloud dependencies. Zero TensorFlow. The firmware is raw C++ that every student can read, modify, and understand.
+
+Because we use WebSerial, the training loop is fast and intuitive — students interact with it in the same browser they use for everything else. But it ends with genuine on-device machine learning where every single step of the pipeline is transparent.
+
+No black boxes. They own the entire stack.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="12" href="#12">12</a> The Hardware: What Students Actually Work With</h3>
+<h2>~$300 per student. Purchased by the school. The instructor receives zero margin.</h2>
+
+<img height="500" alt="Flat lay photo: XIAO ESP32-S3 ML Kit with labeled sensors including flex, joystick, temperature, sound, IMU, actuators including servo, stepper, DC motors, OLED display, and a LiDAR unit, breadboard, and wires." src="a12-hardware-kit.png" />
+
+<br><br><details open><summary><b>The XIAO ESP32-S3 ML Kit is the non-negotiable core. Everything else phases in over time.</b></summary>
+Here is what each student works with.
+
+The core is the Seeed Studio XIAO ESP32-S3 Sense — a fingertip-sized microcontroller with a camera, microphone, WiFi, Bluetooth, and enough compute for on-device neural network inference.
+
+Around that core: flex sensor, joystick, temperature, light, sound, vibration, and IR sensors. Grayscale OLED display, servo motor, stepper motor with driver, dual DC motor driver. An LDROBOT D100 LiDAR unit shared by the class.
+
+Each student's kit fits in roughly the space of a hardcover novel. Organized storage — one labelled bin per student, one shared tool bin — is the single most important infrastructure decision a pilot school makes.
+
+The full price list is publicly available at: hpssjellis.github.io/maker100-xiaoML-kit/price-list-2026-09.html
+
+Budget for a small annual top-up. Expect to replace 15 to 30 percent of boards per year. Breakage is not a problem to be prevented — it is a learning outcome to be managed.
+
+For a 12-student class the real cost works out to approximately $183 per student, not $300, because shared items spread across the class.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="13" href="#13">13</a> Cloud Tools + Sovereign Tools: The Full Industry Picture</h3>
+<h2>Students graduate knowing Edge Impulse AND the open pipeline. Neither alone is enough.</h2>
+
+<img height="500" alt="Two column comparison. Left: Cloud tools — Edge Impulse and SenseCraft AI — industry standard and employer-recognized. Right: Browser tools — webmcu-ai and local-gemma4-pwa — sovereign, offline-capable, and fully transparent." src="a13-cloud-plus-sovereign.png" />
+
+<br><br><details open><summary><b>A typical tech course gives students one or the other. This course gives both — and the judgment to know when to use which.</b></summary>
+The course uses industry-standard cloud ML platforms — Edge Impulse and SenseCraft AI — because those are the tools working engineers actually use. Students graduate knowing how to navigate them.
+
+But the course also teaches the fully sovereign, browser-based, open-source on-device training pipeline — because understanding the full stack, from raw sensor data to neural network weights to compiled firmware, produces engineers who are not dependent on any single vendor.
+
+The comparison matters for the Global South in particular.
+
+Cloud tools require subscriptions, reliable internet, and trust that the platform will remain accessible and affordable indefinitely. The open pipeline requires a browser and a USB cable.
+
+A Maker100 graduate can work in either world. A student trained only on cloud tools is a consumer of infrastructure they do not control. A student trained only on the open pipeline may lack the industry vocabulary to get hired.
+
+Both. Always both.
+
+Links: edgeimpulse.com — sensecraft.seeed.cc — webmcu-ai.github.io
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<!-- ACT V: THE PITCH AND CLOSE  Slides 14-16  ~7 minutes -->
+
+<h3><a name="14" href="#14">14</a> The Pilot Structure: Two Cohorts, One Year, Real Data</h3>
+<h2>Three Passionate Generalists. Three Technology Specialists. Six countries. One central question.</h2>
+
+<img height="500" alt="Table: Passionate Generalist schools — 3 schools, drive over experience, completes every assignment with students, 3 structured zoom consultations. Technology Specialist schools — 3 schools, experienced Arduino educators, GitHub-only, no outside support by design." src="a14-pilot-structure.png" />
+
+<br><br><details open><summary><b>The two cohorts answer the central scaling question: how much expert access does a new school actually need to succeed?</b></summary>
+The pilot is designed to answer one central question: how much expert support does a new school actually need?
+
+Three Passionate Generalist schools: educators with drive but limited hardware background who commit to completing every assignment alongside their students. They receive three structured zoom consultations — at setup, at the plateau where independent solving stops, and at ML integration where a fresh expert eye on final projects is genuinely valuable.
+
+Three Technology Specialist schools: experienced Arduino-style educators who run the entire course using only the public GitHub repository. No structured outside support. This tests true independence — and it might be advantageous for these three schools to communicate with each other.
+
+Geographic diversity is not a preference — it is a requirement. One school per country.
+
+If Generalist schools succeed with three zoom calls, the model scales with minimal instructor time. If they consistently need more, that is equally important data. Either outcome advances the project.
+
+At the end of the year, all participants reconvene with data. That evidence base is what unlocks significant funding at scale.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="15" href="#15">15</a> Three Ways to Make This Happen</h3>
+<h2>The hardware barrier is $300 per student. For the right partner, that is a rounding error.</h2>
+
+<img height="500" alt="Three paths graphic. Path 1: School or district budget allocation. Path 2: Sponsor a cohort — organizations cover hardware for one partner school. Path 3: Student-led fundraising — advocating for their own education is part of the leadership curriculum." src="a15-three-paths.png" />
+
+<br><br><details open><summary><b>For educators: a modest investment for a full year of world-class AI engineering. For financial backers: you do not have to wait for next year's data.</b></summary>
+Let's return to the $300 per student hardware cost.
+
+For the educators in this room: this is a modest, one-time investment for a full year of hands-on, world-class AI engineering education. The curriculum, the tools, and the support structure are free. You buy the hardware. That is it.
+
+For the financial backers here today: you do not have to wait for next year's data.
+
+You can sponsor one of the initial six schools right now — clear that hardware barrier for three to thirty students immediately — and accelerate this pilot into reality. Your contribution goes directly to student hands. Zero overhead.
+
+Three pathways to participation:
+
+One — school or district budget allocation. A single budget line. The return is students who can build, deploy, and audit real AI systems.
+
+Two — sponsor a cohort. Cover the hardware cost for an entire class at a partner school in a country where that $300 is a genuine barrier. This conference is an exceptional venue for that conversation.
+
+Three — student-led fundraising. Students approach local businesses, community leaders, and civic supporters directly. Learning to advocate for their own education is itself part of the leadership curriculum.
+
+Who is coming with me?
+</details>
+
+<br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="16" href="#16">16</a> Meet Again Next Year — With Data.</h3>
+<h2>Six schools. Six countries. One year. Then we scale.</h2>
+
+<img height="500" alt="Split visual: left side — six school flags from six different countries. Right side — upward curve with annotation: evidence base unlocks major funding for global scale." src="a16-meet-again.png" />
+
+<br><br><details open><summary><b>The goal is not a successful pilot. The goal is the evidence base that makes the next hundred schools possible.</b></summary>
+The goal of this pilot is not a successful pilot.
+
+The goal is the evidence base that makes the next hundred schools possible — and the hundred after that.
+
+Six schools. Six countries. Students with genuinely different backgrounds, different connectivity, different levels of educator experience. One full academic year building real things, breaking real things, training real models, and leading each other through it.
+
+At the end of that year, we know the answers the funders need before they commit at scale: Does this work with a generalist educator? Does it work without reliable internet? Does it translate across languages and cultures? How much support does a new school actually need?
+
+The final word on the six schools: three should have passionate generalist educators who commit to doing every assignment alongside their students. The other three should have experienced technology educators who run independently from the GitHub alone. That contrast is the most valuable data the pilot can produce.
+
+The curriculum is MIT-licensed and lives at github.com/hpssjellis/maker100-leaders-robotics.
+
+Contact: jeremy.ellis@sd75.bc.ca — or find me on LinkedIn after the session.
+
+Let's meet again next year with a better understanding of how to teach robotics and AI in a world that needs more builders, more makers, and more engineers who can lead.
+
+Thank you.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+</div>
+<a href="#top">Top of page</a>
+
+<h2>By Jeremy Ellis — <a href="https://ca.linkedin.com/in/jeremy-ellis-4237a9bb">LinkedIn: jeremy-ellis-4237a9bb</a> — Use at your own risk!</h2>
+<h2>GitHub: <a href="https://github.com/hpssjellis">https://github.com/hpssjellis</a></h2>
+<h2>Course: <a href="https://github.com/hpssjellis/maker100-leaders-robotics">maker100-leaders-robotics</a> &nbsp;|&nbsp; arXiv: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a></h2>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+<script>
+ let myIndex = 1;
+ let myLooper = 0;
+ let myCounting = 0;
+ let myMainNum = '10,10';
+ let myMainNum2 = '10,10';
+ let myMainNumLast = 20;
+ let myCountUp = 0;
+ let xSlide = 3;
+ let myAudio01 = new Audio();
+ document.body.style.backgroundColor = "skyblue";
+
+ let myArray = [1,2,3,13,14,16,18,2223,24,29,30,34,37,39,42,43,49,54,57]
+ let myVoiceObject = responsiveVoice.getVoices()
+ let myTemp = ''
+ for (let myLoop=0; myLoop < 50; myLoop++ ){
+    if ( myArray.includes(myLoop) ) {
+       myTemp += '<option value=\''+myLoop + '\'>' + myLoop + ' : ' + myVoiceObject[myLoop].name + '</option>'
+    }
+ }
+ document.getElementById('mySelect01').innerHTML =  myTemp
+
+
+function mySetup(){
+   document.getElementById('myStick').style.display = 'none';
+   xSlide  = document.getElementById('myCountLinks').value;
+   myMainNum = document.getElementById('myCountMax').value.split(',');
+   myMainNumLast = myMainNum[0]
+   console.log('myMainNum')
+   console.log(myMainNum)
+   console.log('myIndex, myMainNumLast, myMainNum[myIndex]')
+   myAudio01.pause();
+   myAudio01.currentTime = 0;
+   myIndex = 0;
+   clearInterval(myLooper);
+   myCountUp = -1;
+}
+
+function carousel() {
+  clearInterval(myCounting);
+  myCountUp = -1;
+  var i;
+  myIndex++;
+  if (myIndex > xSlide) {myIndex = xSlide};
+  window.location.href='#'+myIndex;
+  if (Number.isInteger( parseInt(myMainNum[myIndex-1]) ) ) {
+     myMainNumLast = parseInt(myMainNum[myIndex-1])
+  }
+  console.log(myIndex +', '+ myMainNumLast +', '+  myMainNum[myIndex-1])
+  myCountDown();
+  myCounting = setInterval(myCountDown, 1000);
+  myLooper = setTimeout(carousel, myMainNumLast*1000);
+}
+
+function resumeCarousel() {
+    myCounting = setInterval(myCountDown, 1000);
+    var remainingTime = (myMainNumLast - myCountUp) * 1000;
+    myLooper = setTimeout(carousel, remainingTime);
+}
+
+function myCountDown(){
+  myCountUp++;
+  if (myCountUp >= myMainNumLast ) {
+    myCountUp = myMainNumLast;
+  }
+  if (myIndex >= xSlide && myMainNumLast == myCountUp){
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ALL DONE <input type=button value="Show"  style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+     clearInterval(myCounting);
+     clearInterval(myLooper);
+  }
+  else {
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ${myMainNumLast-myCountUp} seconds remaining <input type=button value="Show" style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+  }
+}
+
+function myNext(){
+    var slideCountString = document.getElementById('myCountLinks').value;
+    xSlide = parseInt(slideCountString.trim(), 10);
+    var durationString = document.getElementById('myCountMax').value;
+    myMainNum = durationString.split(',')
+        .map(function(item) {
+            return parseInt(item.trim(), 10);
+        });
+    clearInterval(myLooper);
+    carousel();
+}
+
+function closeAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = false;
+    });
+}
+
+function openAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = true;
+    });
+}
+</script>
+
+</body>
+</html>
