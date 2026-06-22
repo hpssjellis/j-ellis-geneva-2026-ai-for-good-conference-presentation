@@ -54,7 +54,7 @@ I am Jeremy Ellis. I have taught technology for over 30 years in British Columbi
 
 I founded the GitHub organization webmcu-ai, a framework for fully on-device machine learning training. I help co-chair the AiEng4D Show and Tell, where Global South university students present their TinyML and Edge AI projects online.
 
-Today I am presenting a pilot project to bring my student-led robotics course to the Global South, and I am asking the student leaders in this room to make it happen.
+Today I am presenting a pilot project to bring my student-led robotics course to the Global South, and I am asking the student leaders in this room to help make it happen.
 
 ---
 
@@ -161,11 +161,11 @@ Calculate your student count, calculate your total cost, and solve the funding p
 
 In 30 years teaching I have never had a student win a large scholarship, last year I took a semester off. I was not there to quickly solve my students' problems. They struggled, but they learned deeper.
 
-From that class, two students received over $100,000 scholarships: one the Canadian Schulich, and the other the Canadian Loran.
+From that class, two students received over $100,000 canadian dollar scholarships: a grade 12 girl one the Canadian Schulich scholarship, and the other an then grade 11 boy, this year won the Canadian Loran Scholarship.
 
 That taught me something important. I am the least important part of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture those are the important parts.
 
-Remember no strain, no cognitive, social, emotional, or physical gain. Those scholarships students were impressive without my course, but the course may have helped them realize how capable they were.
+Remember no strain, no  (cognitive, social, emotional, or physical) gain. Those scholarships students were impressive without my course, but the course may have helped them realize how capable they were.
 
 ---
 
@@ -173,12 +173,10 @@ Remember no strain, no cognitive, social, emotional, or physical gain. Those sch
 
 In one year, we meet again. Some schools will have tried. All will have struggled. Some students will have created things none of us expected.
 
-The question is simple: **Which schools will be able to stand here, with data, and show us what their students built?**
+The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built? The schools that succeed here won’t just celebrate their own wins, they will become the blueprint to scale this globally to raise the funds for those who couldn't start today.
 
-That question is not for me. It is for the leaders in this room.
+First, you build for your community. Then, you lead for the world. That question is not for me. It is for the leaders in this room. We need the third student at the table. We need the voice no one expected. We need the person who sees the simple truth the experts miss.
 
-We need the third student at the table. We need the voice no one expected. We need the person who sees the simple truth the experts miss.
-
-Don't let the future fail because of a bad VCC line.
+Don't let the future fail because of a bad red wire.
 
 Thank you.
