@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Maker100 Leaders Robotics AI for Good Geneva 2026</title></head>
+<body>
+
+<h1>Maker100 Leaders: Robotics, ML &amp; IoT, A Global Six-School Pilot</h1>
+
+This presentation at <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html</a><br><br>
+The Github Repository is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">https://github.com/hpssjellis/maker100-leaders-robotics</a><br><br>
+
+Number of Slides: <input type="text" id="myCountLinks" size="6" value="10" >. List of seconds per slide: <input type="text" id="myCountMax" size="30" value="30,60,90,90,120,90,90,90,90,90,90,90,90,100,120,120" >   Can be a list of seconds example: 17, 20, 24, 20 The last number continues.
+<br><br>
+
+Choose the language: <div id="google_translate_element"></div>
+
+<script type="text/javascript">
+document.myVoiceVar = 7
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script><br>
+
+Then choose the Speaker: <Select id="mySelect01" onchange="{
+  document.getElementById('myVoiceNum').value =  this.value
+  document.getElementById('myNumberSpeak').click()
+}"></select><br>
+
+<div id="myDiv01">...</div>
+Voice number: <input id="myVoiceNum" type=number  style="width: 5em" value=3>
+<input id="myNumberSpeak" type="button" value="Speak!" onclick="{
+    let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name
+    document.getElementById('myDiv01').innerHTML =  myV
+    responsiveVoice.speak(document.getElementById('myMain').innerText, myV, {pitch: 1, rate: 1, volume : 1});
+}">
+
+<br><br>
+
+<h2>This section readers have programmed autoscroll</h2>
+
+<input type=button value="Jeremy Ellis Reading in English" onclick="{
+   document.getElementById('myCountMax').value = '30,60,90,90,120,90,90,90,90,90,90,90,90,100,120,120';
+   mySetup();
+   myAudio01 = new Audio('maker100-leaders-ellis.m4a');
+   myAudio01.play();
+   carousel();
+}">
+
+<br><br><br>
+QR code to this presentation <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">website</a><br>
+<img height="500" alt="QR code — scan to open presentation" src="qr-maker100-leaders.png" />
+<br><br><br>
+
+<div id="myNumSlides" style=" position:sticky; top:0px; left:20px; height:25px; "> ...</div>  <br>
+
+<div id="myStick"  style=" position:sticky; top:25px; display:inline; ">
+
+<input type=button value="Start-No-Sound" onclick="{
+   mySetup()
+   carousel();
+}">
+
+<input type=button value="Rewind" onclick="{
+   myIndex = 0;
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+}">
+
+<input type=button value="-" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   myIndex -= 1;
+   window.location.href='#'+myIndex;
+}">
+
+<input type=button value="+" onclick="{
+  clearInterval(myLooper);
+  clearInterval(myCounting);
+  myIndex += 1;
+  window.location.href='#'+myIndex;
+}">
+
+<input type=button value="Back" onclick="{
+   myIndex = myIndex - 2;
+   if (myIndex <= 0){myIndex=0};
+   myNext();
+}">
+
+<input type=button value="Next" onclick="{
+   myNext();
+}">
+
+<input id="myPause" type=button value="Pause" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (this.value == 'Pause'){
+       this.value = 'Play / Pause';
+       if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+   } else {
+     resumeCarousel();
+     this.value = 'Pause';
+     if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+         myAudio01.play();
+      }
+   }
+}">
+
+<input type=button value="Hide" onclick="{
+   document.getElementById('myStick').style.display = 'none';
+}">
+
+<input type=button value="TOP" onclick="{
+   window.location.href='#top';
+}">
+
+<button onclick="closeAllDetails()">Close All</button>
+<button onclick="openAllDetails()">Open All</button>
+
+</div>
+
+
+<div id="myMain">
+
+
+<!-- ACT I: THE HOOK AND COST TRANSPARENCY  Slides 1-3  ~4 minutes -->
+
+<h3><a name="1" href="#1">1 </a> Course Pilot, Six Schools. Six Countries. $200 per Student.</h3>
+<h2>Maker100 Leaders: Robotics, ML &amp; IoT, A Global Pilot</h2>
+
+<img height="500" alt="" src="a01-six-schools.png" />
+
+<br><br><details open><summary><b>6 Schools from 6 different countries. 3 to 30 students per school. Approximately $200 per student hardware cost.</b></summary>
+I am here today with a very specific mission.
+
+I am looking for exactly six schools, from six different countries, to pilot the Maker100 Leaders Robotics course for the upcoming academic year.
+
+Three to thirty students per school. Let's talk numbers upfront so there are no surprises: the hardware cost is roughly $200 USD per student plus tax and shipping for the XIAO ML kit and all supporting components, purchased by your school directly from online suppliers.
+
+I make absolutely nothing from the hardware. But I only support the platform I have stress-tested for years in my own classroom.
+
+We are here to launch this pilot, gather hard undeniable student data over one full year, and stand back on a stage like this next year to unlock the significant financial support needed to scale this globally.
+
+If you want your school or organization to be one of those six pioneers, watch closely.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="2" href="#2">2 </a> THE RED WIRE STORY</h3>
+<h2>I want to start with a story from my robotics class.</h2>
+
+<img height="500" alt="" src="./media/" />
+
+<br><br><details open><summary><b>A three-person team was falling apart over their final project.</b></summary>
+a robot arm with IoT sensors and a tiny vision ML loop. The leader was capable. The pre-engineer was meticulous. And yet the system kept failing, working one moment, collapsing the next.
+
+Beside them stood the third student. Quiet. Barely passing the course.
+
+After another failure, he spoke up gently: "What if the red wire isn't working?"
+
+The leader froze. You could feel the tension. The pre-engineer sighed, then said. "That is an easy test." And swapped the red wire to a different red breadboard wire.
+
+Instantly, the entire robot came alive. Smooth. Stable. Perfect.
+
+The breakthrough didn't come from expertise. It came from inclusion. From giving space to the voice no one expected to matter.
+
+Now imagine a world where only a handful of powerful cloud companies get to decide how we solve society's hardest problems. That's a world with only two students at the table.
+
+We need the third student. We need the unexpected insight. The simple truth that experts miss.
+
+Democratizing AI isn't optional. It's how we keep the future from failing because of a bad VCC line.
+
+And for the record, in my class we never throw away equipment students call broken. But that day, we held a small ceremony... and tossed that little red wire straight into the garbage.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="3" href="#3">3 </a> WHO I AM AND WHY I'M HERE</h3>
+<h2>I am Jeremy Ellis. I have taught technology for over 30 years in British Columbia, Canada.</h2>
+
+<img height="500" alt="" src="a03-use-vs-build.png" />
+
+<br><br><details open><summary><b>I founded the GitHub organization webmcu-ai</b></summary>
+A framework for fully on-device machine learning training. I help co-chair the AiEng4D Show and Tell, where Global South university students present their TinyML and Edge AI projects online.
+
+Today I am presenting a pilot project to bring my student-led robotics course to the Global South, and I am asking the student leaders in this room to help make it happen.
+</details>
+
+<br><br><br><br><br>
+<hr>
+
+
+
+
+<h3><a name="4" href="#4">4 </a> THE PROBLEM, AND THE STUDENTS WHO SOLVE IT</h3>
+<h2>Students today are looking at an uncertain future. They see artificial intelligence changing every industry.</h2>
+
+<!-- <img height="500" alt="" src="a04-local-llm.png" />  -->
+<img height="500" alt="" src="./media/image02-xiao2.png" />
+
+<br><br><details open><summary><b>They have a choice: ride along with technology built by others, or learn how it works and become the people who build what comes next.</b></summary>
+Throughout my career I have watched that choice play out in classrooms. And I've learned something important.
+
+I don't teach pre-engineers, students who build things and love the complexity of math and physics. They teach me.
+
+I also don't teach leaders. Leaders are students who look outward while digging deeper. I put students into situations where they discover they are leaders.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="5" href="#5">5 </a> THE COURSE, MAKER100 LEADERS ROBOTICS</h3>
+<h2>The course is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">github.com/hpssjellis/maker100-leaders-robotics</a> open source, free, and can be updated.</h2>
+
+<img height="500" alt="" src="a05-sovereign-ai.png" />
+
+<br><br><details open><summary><b>This is not an easy course. </b></summary>
+Students solve 40 to 60 robotics, machine learning, sensor, actuator, and IoT challenges, and then teach others their solutions.
+
+No full lectures. Students or the teacher record all 60-plus assignments on a public or private chart, solved in any order.
+
+The Rule of Lead Three: If you are the first person to solve an assignment, you must teach three others. Those three are responsible for helping three more. The maximum mark of 90% gets closer to 100% as that classroom tone of collaboration increases.
+
+I am completely comfortable with ten students earning 100 percent. It hurts no one, and it massively improves classroom tone, communication, confidence, and joy.
+
+The Analog Firewall: The class always starts here. Code is summarized on paper before loading onto a microcontroller. Circuit diagrams are drawn by hand and checked by another student before wiring. Power is connected only after a second check.
+
+Why? Because thinking before acting is a professional habit. And because a hardware failure caught on paper costs nothing. A hardware failure caught after a short circuit has a real cost.
+
+LLMs as lab assistants: Students learn to ask AI for help, understand the answer, verify it, improve it, and eventually build their own tools. AI becomes a lab assitant, debugger and a tutor, not a replacement for understanding.
+
+Once assignments are complete, students do Level 1 and Level 2 final projects. Level 1 is a course pass. Level 2 earns the higher mark. Multiple people are expected to reach the top grade. 
+
+In 2026 my students completed 45 assignments before starting their final projects. I completed 8 more assignments for the top students to finish with their projects.  
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3><a name="6" href="#6">6 </a> LOCAL AI AND WHY IT MATTERS</h3>
+<h2>Teenagers are already using AI assistants. </h2>
+
+<img height="500" alt="" src="a06-analog-firewall.png" />
+
+<br><br><details open><summary><b>Local LLM Demo</b></summary>
+Teenagers are already using AI assistants. The question is whether they understand these tools, or become dependent on them.
+
+Why not load an LLM locally using an installable webpage, a Progressive Web App?
+
+A student computer becomes a private AI lab assistant without sending every question and every piece of student data somewhere else.
+
+Demo: Local Gemma 2B and 12B via PWA
+
+Privacy alone makes this worth doing. But the deeper idea is this: if advanced AI requires a few enormous companies, most people become consumers. If we can put AI tools into classrooms everywhere, students become creators.
+
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="7" href="#7">7 </a> ON-DEVICE MACHINE LEARNING</h3>
+<h2>Demo WebMCU-AI The full Machine Learning Pipeline</h2>
+
+<img height="500" alt="" src="a07-lead-three.png" />
+
+<br><br><details open><summary><b>The industrial approach to machine learning is to send your data to the cloud and receive a fully trained model back.</b></summary>
+
+But what if the entire pipeline could run on the microcontroller itself?
+
+Many would say that's impossible, TensorFlow Lite is too large, the hardware too constrained. But I wanted to understand it from first principles. With the help of LLMs, I built the entire training and inference pipeline from scratch on the XIAO ML Kit.
+
+I must acknowledge Vijay Reddi, a member of AiEng4D, whose tinyTorch project and mlsysbook.ai inspired that from-scratch philosophy.
+
+The XIAO ML Kit is built around the Seeed Studio XIAO ESP32S3 Sense, a microcontroller that costs under $15 USD. That price matters. A school can equip a classroom without a massive grant. A student can experiment. A teacher can replace broken parts.
+
+We have working pipelines for:
+<ul>
+  <li>Vision classification
+  <li>Vision object detection FOMO with XY coordinates
+  <li>Anomaly detection
+  <li>Sound classification
+  <li>Motion classification
+</ul>
+The first WebSerial training system took 147 versions. That is also part of the lesson. Real technology is not created perfectly the first time. You build. You test. You improve. You learn.
+
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="8" href="#8">8 </a> THE PILOT PROPOSAL, YOUR LEADERSHIP CHALLENGE</h3>
+<h2>Maker100 Leaders Robotics needs Leaders</h2>
+
+<img height="500" alt="" src="a08-three-pathways.png" />
+
+<br><br><details open><summary><b>You are in one of the best places on the planet to do that.</b></summary>
+Here is what you need:
+
+At least three pre-engineers willing to work hard
+3 to 30 students, grades 9 to 12
+~$200 USD per student to start; ~$50 USD each year or semester for replacement parts. Yes, we break things. That is part of the learning.
+Access to a computer lab, ideally with a 3D printer
+A teacher teacher sponsor willing to be a co-learner, not a lecturer, someone ready to tackle these challenges side-by-side with you.
+If your teacher is willing to learn and complete the work, I will support that class three times during the first course: at the start for safety, in the middle when students hit problems they cannot solve alone, and near the end for the most challenging Level 2 assignments. If you instructor is an arduino wiard and already has an EdgeImpulse login, they may want to do the course without contact, and connect next year.
+
+Calculate your student count, calculate your total cost, and solve the funding problem. That is not my job. But knowing where the money comes from is your first real leadership challenge.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="9" href="#9">9 </a> WHAT I LEARNED FROM STEPPING BACK</h3>
+<h2>.......</h2>
+
+<img height="500" alt="" src="a09-ai-scaffold.png" />
+
+<br><br><details open><summary><b>What is important?</b></summary>
+In 30 years teaching I have never had a student win a large scholarship, last year I took a semester off. I was not there to quickly solve my students' problems. They struggled, but they learned deeper.
+
+From that class, two students received over $100,000 in Canadian scholarships: a grade 12 girl won the Canadian Schulich scholarship, and the other a grade 11 boy, this year, won the Canadian Loran Scholarship.
+
+That taught me something important. I am the least important part of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture those are the important parts.
+
+Remember no strain, no (cognitive, social, emotional, or physical) gain. Those scholarships students were impressive without my course, but the course may have helped them realize how capable they were.
+  
+  I stepped back so my students could step up. And when they did, they won major national scholarships. This course proves how capable you already are when adults get out of your way.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3><a name="10" href="#10">10 </a> CLOSING</h3>
+<h2>In one year, we meet again.</h2>
+
+<img height="500" alt="" src="a10-classroom.png" />
+
+<br><br><details open><summary><b>Leadership locally and Globally</b></summary>
+In one year, we meet again. Some schools will have tried. All will have struggled. Some students will have created things none of us expected.
+
+The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built? The schools that succeed here won’t just celebrate their own wins, they will become the blueprint to scale this globally to raise the funds for those who couldn't start today.
+
+First, you build for your community. Then, you lead for the world. That question is not for me. It is for the leaders in this room. We need the third student at the table. We need the voice no one expected. We need the person who sees the simple truth the experts miss.
+
+Don't let the future fail because of a bad red wire.
+
+Thank you.
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+</div>
+<a href="#top">Top of page</a>
+
+<h2>By Jeremy Ellis <a href="https://ca.linkedin.com/in/jeremy-ellis-4237a9bb">LinkedIn: jeremy-ellis-4237a9bb</a> Use at your own risk!</h2>
+<h2>GitHub Profile: <a href="https://github.com/hpssjellis">https://github.com/hpssjellis</a></h2>
+<h2>on-device webmcu-ai: <a href="https://github.com/webmcu-ai">https://github.com/webmcu-ai</a> &nbsp;|&nbsp; arXiv: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a></h2>
+<h2>WebSerial Vision on-device demo webpage: <a href="https://webmcu-ai.github.io/webmcu-vision-pwa/index.html">webmcu-vision-pwa</a></h2>
+<h2>The Course: <a href="https://github.com/hpssjellis/maker100-leaders-robotics">maker100-leaders-robotics</a></h2>
+<h2>Local LLM's: <a href="https://webmcu-ai.github.io/local-gemma4-pwa/index.html">Gemma4:e2b as a webpage PWA</a> &nbsp;|&nbsp;   <a href="https://webmcu-ai.github.io/ollama-gemma4-12b-pwa/index.html">ollama-gemma4:12b as a webpage PWA</a> </h2>
+  
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+
+
+<script>
+ let myIndex = 1;
+ let myLooper = 0;
+ let myCounting = 0;
+ let myMainNum = '10,10';
+ let myMainNum2 = '10,10';
+ let myMainNumLast = 20;
+ let myCountUp = 0;
+ let xSlide = 3;
+ let myAudio01 = new Audio();
+ document.body.style.backgroundColor = "skyblue";
+
+ let myArray = [1,2,3,13,14,16,18,2223,24,29,30,34,37,39,42,43,49,54,57]
+ let myVoiceObject = responsiveVoice.getVoices()
+ let myTemp = ''
+ for (let myLoop=0; myLoop < 50; myLoop++ ){
+    if ( myArray.includes(myLoop) ) {
+       myTemp += '<option value=\''+myLoop + '\'>' + myLoop + ' : ' + myVoiceObject[myLoop].name + '</option>'
+    }
+ }
+ document.getElementById('mySelect01').innerHTML =  myTemp
+
+
+function mySetup(){
+   document.getElementById('myStick').style.display = 'none';
+   xSlide  = document.getElementById('myCountLinks').value;
+   myMainNum = document.getElementById('myCountMax').value.split(',');
+   myMainNumLast = myMainNum[0]
+   console.log('myMainNum')
+   console.log(myMainNum)
+   console.log('myIndex, myMainNumLast, myMainNum[myIndex]')
+   myAudio01.pause();
+   myAudio01.currentTime = 0;
+   myIndex = 0;
+   clearInterval(myLooper);
+   myCountUp = -1;
+}
+
+function carousel() {
+  clearInterval(myCounting);
+  myCountUp = -1;
+  var i;
+  myIndex++;
+  if (myIndex > xSlide) {myIndex = xSlide};
+  window.location.href='#'+myIndex;
+  if (Number.isInteger( parseInt(myMainNum[myIndex-1]) ) ) {
+     myMainNumLast = parseInt(myMainNum[myIndex-1])
+  }
+  console.log(myIndex +', '+ myMainNumLast +', '+  myMainNum[myIndex-1])
+  myCountDown();
+  myCounting = setInterval(myCountDown, 1000);
+  myLooper = setTimeout(carousel, myMainNumLast*1000);
+}
+
+function resumeCarousel() {
+    myCounting = setInterval(myCountDown, 1000);
+    var remainingTime = (myMainNumLast - myCountUp) * 1000;
+    myLooper = setTimeout(carousel, remainingTime);
+}
+
+function myCountDown(){
+  myCountUp++;
+  if (myCountUp >= myMainNumLast ) {
+    myCountUp = myMainNumLast;
+  }
+  if (myIndex >= xSlide && myMainNumLast == myCountUp){
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ALL DONE <input type=button value="Show"  style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+     clearInterval(myCounting);
+     clearInterval(myLooper);
+  }
+  else {
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ${myMainNumLast-myCountUp} seconds remaining <input type=button value="Show" style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+  }
+}
+
+function myNext(){
+    var slideCountString = document.getElementById('myCountLinks').value;
+    xSlide = parseInt(slideCountString.trim(), 10);
+    var durationString = document.getElementById('myCountMax').value;
+    myMainNum = durationString.split(',')
+        .map(function(item) {
+            return parseInt(item.trim(), 10);
+        });
+    clearInterval(myLooper);
+    carousel();
+}
+
+function closeAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = false;
+    });
+}
+
+function openAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = true;
+    });
+}
+</script>
+
+</body>
+</html>
