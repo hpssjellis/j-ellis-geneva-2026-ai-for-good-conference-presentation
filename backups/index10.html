@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maker100 Leaders Robotics — AI for Good Geneva 2026</title>
+<style>
+  :root {
+    --ink:       #0d1117;
+    --paper:     #f0f4f0;
+    --green:     #1a7a3c;
+    --green-mid: #2ea55a;
+    --green-lt:  #d4edda;
+    --wire-red:  #c0392b;
+    --wire-lt:   #fdecea;
+    --gold:      #c89b2a;
+    --gold-lt:   #fdf6e3;
+    --sky:       #1b6ca8;
+    --sky-lt:    #e8f3fb;
+    --rule:      #d0d8d0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  /* ── Top bar ── */
+  #top-bar {
+    background: var(--green);
+    color: white;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  #top-bar a { color: #a8f0c0; text-decoration: none; }
+  #top-bar a:hover { text-decoration: underline; }
+
+  /* ── Sticky controls ── */
+  #myStick {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    color: white;
+    padding: 8px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+  }
+  #myStick button, #myStick input[type=button] {
+    background: var(--green-mid);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+  }
+  #myStick button:hover, #myStick input[type=button]:hover {
+    background: var(--green);
+  }
+  #myStick input[type=button][value="Pause"],
+  #myStick input[type=button][value="Play / Pause"] {
+    background: var(--wire-red);
+  }
+  #myStick input[type=text] {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 3px 6px;
+    border: 1px solid #555;
+    background: #222;
+    color: #eee;
+    border-radius: 3px;
+  }
+  #myNumSlides {
+    position: sticky;
+    top: 46px;
+    z-index: 99;
+    background: var(--green-lt);
+    border-bottom: 1px solid var(--rule);
+    padding: 4px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--green);
+  }
+
+  /* ── Slide ── */
+  .slide {
+    max-width: 860px;
+    margin: 48px auto;
+    padding: 0 24px;
+  }
+  .slide-num {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--green-mid);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .slide h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .slide h3 {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+  .slide img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    border-radius: 6px;
+    margin: 18px 0;
+    background: #e8e8e8;
+  }
+
+  /* ── Coloured accent bands ── */
+  .accent-red  { border-left: 5px solid var(--wire-red); background: var(--wire-lt); padding: 18px 22px; border-radius: 0 6px 6px 0; margin: 18px 0; }
+  .accent-green{ border-left: 5px solid var(--green);    background: var(--green-lt); padding: 18px 22px; border-radius: 0 6px 6px 0; margin: 18px 0; }
+  .accent-gold { border-left: 5px solid var(--gold);     background: var(--gold-lt);  padding: 18px 22px; border-radius: 0 6px 6px 0; margin: 18px 0; }
+  .accent-sky  { border-left: 5px solid var(--sky);      background: var(--sky-lt);   padding: 18px 22px; border-radius: 0 6px 6px 0; margin: 18px 0; }
+
+  details { margin: 14px 0; }
+  details summary {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--green);
+    margin-bottom: 8px;
+    list-style: none;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: "▶ "; font-size: 0.8em; }
+  details[open] summary::before { content: "▼ "; }
+
+  details p, details li { margin-bottom: 10px; }
+  details ul { padding-left: 1.4em; }
+
+  hr.slide-rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 56px 0 0;
+  }
+
+  /* ── Hero slide 1 ── */
+  #slide1-hero {
+    background: var(--green);
+    color: white;
+    padding: 56px 36px 48px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+  #slide1-hero .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #a8f0c0;
+    margin-bottom: 14px;
+  }
+  #slide1-hero h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    color: white;
+  }
+  #slide1-hero .stat-row {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    flex-wrap: wrap;
+    margin: 28px 0;
+  }
+  #slide1-hero .stat { text-align: center; }
+  #slide1-hero .stat .num {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #a8f0c0;
+    line-height: 1;
+  }
+  #slide1-hero .stat .label {
+    font-size: 0.85rem;
+    color: #d0f0e0;
+    margin-top: 4px;
+  }
+  #slide1-hero .sub {
+    font-size: 1rem;
+    color: #d0f0e0;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Red wire dramatic block ── */
+  .red-wire-quote {
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--wire-red);
+    border-left: 4px solid var(--wire-red);
+    padding-left: 20px;
+    margin: 22px 0;
+    line-height: 1.4;
+  }
+
+  /* ── Scholarship callout ── */
+  .scholarship-box {
+    background: var(--gold-lt);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 20px 0;
+  }
+  .scholarship-box .award {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #7a5800;
+    margin-bottom: 6px;
+  }
+
+  /* ── Pill tags ── */
+  .pill {
+    display: inline-block;
+    background: var(--green-lt);
+    color: var(--green);
+    border: 1px solid var(--green-mid);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.82rem;
+    font-family: 'Courier New', monospace;
+    margin: 3px 2px;
+  }
+
+  /* ── Checklist ── */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 5px 0 5px 28px; position: relative; }
+  .checklist li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--green-mid);
+    font-weight: 700;
+  }
+
+  /* ── CTA box ── */
+  .cta-box {
+    background: var(--ink);
+    color: white;
+    border-radius: 8px;
+    padding: 28px 30px;
+    margin: 24px 0;
+    text-align: center;
+  }
+  .cta-box h3 {
+    font-size: 1.3rem;
+    color: #a8f0c0;
+    margin-bottom: 10px;
+    font-family: Georgia, serif;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .cta-box p { color: #ccc; font-size: 0.95rem; }
+
+  /* ── Footer ── */
+  #footer {
+    background: var(--ink);
+    color: #aaa;
+    padding: 32px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 2;
+    text-align: center;
+  }
+  #footer a { color: #a8f0c0; text-decoration: none; }
+  #footer a:hover { text-decoration: underline; }
+  #footer h3 { color: white; font-size: 13px; margin-bottom: 8px; font-family: 'Courier New', monospace; text-transform: none; letter-spacing: 0; }
+
+  /* ── Setup panel (hidden initially) ── */
+  #setup-panel {
+    background: #f8f8f4;
+    border-bottom: 1px solid var(--rule);
+    padding: 12px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    display: none;
+  }
+  #setup-panel label { margin-right: 8px; color: #555; }
+  #setup-panel input[type=text] { padding: 3px 6px; border: 1px solid #ccc; border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .slide { padding: 0 14px; }
+    #slide1-hero { padding: 36px 18px 32px; }
+    #slide1-hero .stat .num { font-size: 2rem; }
+    .red-wire-quote { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Top info bar ── -->
+<div id="top-bar">
+  <span>📄 Presentation: <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">hpssjellis.github.io/maker100-leaders-robotics</a></span>
+  <span>| 🔗 Repo: <a href="https://github.com/hpssjellis/maker100-leaders-robotics">github.com/hpssjellis/maker100-leaders-robotics</a></span>
+  <span style="margin-left:auto;">
+    Number of slides: <input type="text" id="myCountLinks" size="4" value="9">
+    &nbsp; Seconds/slide: <input type="text" id="myCountMax" size="40" value="60,90,90,90,120,90,90,90,120">
+  </span>
+</div>
+
+<!-- ── Setup panel (voice / translate) ── -->
+<div id="setup-panel">
+  Language: <div id="google_translate_element" style="display:inline-block"></div> &nbsp;&nbsp;
+  Speaker: <select id="mySelect01" onchange="{
+    document.getElementById('myVoiceNum').value = this.value;
+    document.getElementById('myNumberSpeak').click();
+  }"></select> &nbsp;
+  Voice #: <input id="myVoiceNum" type="number" style="width:4em" value="3">
+  <input id="myNumberSpeak" type="button" value="Speak!" onclick="{
+    let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name;
+    responsiveVoice.speak(document.getElementById('myMain').innerText, myV, {pitch:1, rate:1, volume:1});
+  }">
+</div>
+<div id="myDiv01" style="display:none"></div>
+
+<!-- ── Sticky controls ── -->
+<div id="myStick" style="display:none;">
+  <input type="button" value="Jeremy Reading" onclick="{
+    document.getElementById('myCountMax').value = '60,90,90,90,120,90,90,90,120';
+    mySetup();
+    myAudio01 = new Audio('maker100-leaders-ellis.m4a');
+    myAudio01.play();
+    carousel();
+  }">
+  <input type="button" value="▶ Start" onclick="{ mySetup(); carousel(); }">
+  <input type="button" value="⏮ Rewind" onclick="{
+    myIndex = 0; clearInterval(myLooper); clearInterval(myCounting);
+    if (!myAudio01.paused) myAudio01.pause();
+  }">
+  <input type="button" value="← Back" onclick="{ myIndex = myIndex - 2; if(myIndex<=0){myIndex=0;} myNext(); }">
+  <input type="button" value="Next →" onclick="{ myNext(); }">
+  <input id="myPause" type="button" value="Pause" onclick="{
+    clearInterval(myLooper); clearInterval(myCounting);
+    if(this.value=='Pause'){
+      this.value='Play / Pause';
+      if(!myAudio01.paused) myAudio01.pause();
+    } else {
+      resumeCarousel(); this.value='Pause';
+      if(myAudio01.paused && myAudio01.currentTime>0 && !myAudio01.ended) myAudio01.play();
+    }
+  }">
+  <button onclick="closeAllDetails()">Close All</button>
+  <button onclick="openAllDetails()">Open All</button>
+  <input type="button" value="Setup ▾" onclick="{ var p=document.getElementById('setup-panel'); p.style.display=p.style.display=='none'?'block':'none'; }">
+  <input type="button" value="Hide" onclick="{ document.getElementById('myStick').style.display='none'; }">
+  <a href="#top" style="color:#a8f0c0; font-size:12px; text-decoration:none;">▲ Top</a>
+</div>
+
+<!-- ── Slide counter ── -->
+<div id="myNumSlides">
+  &nbsp;&nbsp; Slide counter will appear here &nbsp;
+  <input type="button" value="Show Controls" style="height:20px; font-size:11px;" onclick="{ document.getElementById('myStick').style.display='flex'; }">
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════════ -->
+<div id="myMain">
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 1 · HOOK: THE RED WIRE STORY
+───────────────────────────────────────────── -->
+<a name="1" href="#1"></a>
+<div id="slide1-hero">
+  <div class="eyebrow">AI for Good Geneva 2026 · Youth Stage</div>
+  <h1>Don't let the future fail<br>because of a bad red wire.</h1>
+  <div class="stat-row">
+    <div class="stat"><div class="num">6</div><div class="label">schools</div></div>
+    <div class="stat"><div class="num">6</div><div class="label">countries</div></div>
+    <div class="stat"><div class="num">$200</div><div class="label">per student</div></div>
+    <div class="stat"><div class="num">1</div><div class="label">year pilot</div></div>
+  </div>
+  <p class="sub">Maker100 Leaders: Robotics, ML &amp; IoT — a global pilot for student-led Edge AI education</p>
+</div>
+
+<div class="slide">
+  <div class="slide-num">Slide 1 of 9 — The Hook</div>
+  <h3>The Red Wire Story</h3>
+  <h2>A three-person team. A robot that wouldn't work. And the student nobody expected.</h2>
+
+  <img src="./media/" alt="Robot arm with IoT sensors and ML vision loop" />
+
+  <details open>
+    <summary>The breakthrough that changed how I teach</summary>
+
+    <p>A three-person team in my robotics class was falling apart over their final project — a robot arm with IoT sensors and a tiny vision ML loop. The leader was capable. The pre-engineer was meticulous. And yet the system kept failing, working one moment, collapsing the next.</p>
+
+    <p>Beside them stood the third student. Quiet. Barely passing the course.</p>
+
+    <p class="red-wire-quote">"What if the red wire isn't working?"</p>
+
+    <p>The leader froze. You could feel the tension. The pre-engineer sighed, then said: "That is an easy test." And swapped the wire.</p>
+
+    <p>Instantly, the entire robot came alive. Smooth. Stable. Perfect.</p>
+
+    <div class="accent-red">
+      <strong>The breakthrough didn't come from expertise. It came from inclusion.</strong> From giving space to the voice no one expected to matter.
+    </div>
+
+    <p>Now imagine a world where only a handful of powerful cloud companies get to decide how we solve society's hardest problems. That's a world with only two students at the table.</p>
+
+    <p>We need the third student. We need the unexpected insight. The simple truth that experts miss. Democratizing AI isn't optional. It's how we keep the future from failing because of a bad VCC line.</p>
+
+    <p>And for the record — in my class we never throw away equipment students call broken. But that day, we held a small ceremony... and tossed that little red wire straight into the garbage.</p>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 2 · THE PITCH
+───────────────────────────────────────────── -->
+<a name="2" href="#2"></a>
+<div class="slide">
+  <div class="slide-num">Slide 2 of 9 — The Pilot</div>
+  <h3>Course Pilot · Six Schools · Six Countries · $200 per Student</h3>
+  <h2>I am here today with a very specific mission.</h2>
+
+  <img src="a01-six-schools.png" alt="Map showing six pilot schools across six countries" />
+
+  <details open>
+    <summary>No surprises — let's talk numbers first</summary>
+
+    <p>I am looking for exactly six schools, from six different countries, to pilot the Maker100 Leaders Robotics course for the upcoming academic year. Three to thirty students per school.</p>
+
+    <div class="accent-green">
+      <strong>Hardware cost: roughly $200 USD per student</strong> — plus tax and shipping for the XIAO ML Kit and all supporting components, purchased by your school directly from online suppliers. I make absolutely nothing from the hardware. But I only support the platform I have stress-tested for years in my own classroom.
+    </div>
+
+    <p>We are here to launch this pilot, gather hard undeniable student data over one full year, and stand back on a stage like this next year to unlock the significant financial support needed to scale this globally.</p>
+
+    <p>If you want your school or organization to be one of those six pioneers, watch closely.</p>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 3 · WHO I AM
+───────────────────────────────────────────── -->
+<a name="3" href="#3"></a>
+<div class="slide">
+  <div class="slide-num">Slide 3 of 9 — Who Is This Guy?</div>
+  <h3>Jeremy Ellis · BC Canada · 30+ Years in the Classroom</h3>
+  <h2>I don't teach leaders. I put students in situations where they discover they already are one.</h2>
+
+  <img src="a03-use-vs-build.png" alt="Use vs Build — the student choice" />
+
+  <details open>
+    <summary>Why I'm here, not what I've done</summary>
+
+    <p>I am Jeremy Ellis. I have taught technology for over 30 years in British Columbia, Canada. I founded the GitHub organization <strong>webmcu-ai</strong> — a framework for fully on-device machine learning training. I help co-chair the AiEng4D Show and Tell, where Global South university students present their TinyML and Edge AI projects online.</p>
+
+    <p>But credentials aren't the point. Here is what 30 years actually taught me:</p>
+
+    <div class="accent-green">
+      <p>Students today see artificial intelligence changing every industry. They have a choice: <strong>ride along with technology built by others</strong>, or learn how it works and become the people who build what comes next.</p>
+      <p>I don't teach pre-engineers — students who love complexity and math and physics. <em>They teach me.</em></p>
+      <p>I also don't teach leaders. Leaders are students who look outward while digging deeper. I put students into situations where they <em>discover</em> they are leaders.</p>
+    </div>
+
+    <p>Today I am presenting a pilot project to bring my student-led robotics course to the Global South — and I am asking the student leaders in this room to help make it happen.</p>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 4 · THE COURSE
+───────────────────────────────────────────── -->
+<a name="4" href="#4"></a>
+<div class="slide">
+  <div class="slide-num">Slide 4 of 9 — The Course</div>
+  <h3>Maker100 Leaders Robotics · Open Source · Free · Updatable</h3>
+  <h2>This is not an easy course. That is the whole point.</h2>
+
+  <img src="a05-sovereign-ai.png" alt="Course overview diagram" />
+
+  <details open>
+    <summary>How the course actually works</summary>
+
+    <p>The course is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">github.com/hpssjellis/maker100-leaders-robotics</a> — open source, free, and can be updated.</p>
+
+    <p>Students solve 40 to 60 robotics, machine learning, sensor, actuator, and IoT challenges — and then teach others their solutions. No full lectures. Students or the teacher record all 60-plus assignments on a public or private chart, solved in any order.</p>
+
+    <div class="accent-green">
+      <strong>The Rule of Lead Three:</strong> If you are the first person to solve an assignment, you must teach three others. Those three are responsible for helping three more. The maximum mark of 90% gets closer to 100% as that classroom tone of collaboration increases. I am completely comfortable with ten students earning 100 percent. It hurts no one — and it massively improves classroom tone, communication, confidence, and joy.
+    </div>
+
+    <div class="accent-sky">
+      <strong>The Analog Firewall:</strong> The class always starts here. Code is summarized on paper before loading onto a microcontroller. Circuit diagrams are drawn by hand and checked by another student before wiring. Power is connected only after a second check. Because thinking before acting is a professional habit — and a hardware failure caught on paper costs nothing.
+    </div>
+
+    <div class="accent-gold">
+      <strong>LLMs as lab assistants:</strong> Students learn to ask AI for help, understand the answer, verify it, improve it, and eventually build their own tools. AI becomes a lab assistant, debugger, and tutor — not a replacement for understanding.
+    </div>
+
+    <p>Once assignments are complete, students do Level 1 and Level 2 final projects. Level 1 is a course pass. Level 2 earns the higher mark — and multiple people are expected to reach the top grade. In 2026 my students completed 45 assignments before starting their final projects.</p>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 5 · ON-DEVICE ML
+───────────────────────────────────────────── -->
+<a name="5" href="#5"></a>
+<div class="slide">
+  <div class="slide-num">Slide 5 of 9 — On-Device Machine Learning</div>
+  <h3>Demo: WebMCU-AI · The Full ML Pipeline on a $15 Microcontroller</h3>
+  <h2>They said it was impossible. TensorFlow Lite is too large. The hardware too constrained.</h2>
+
+  <img src="a07-lead-three.png" alt="WebMCU-AI on-device ML pipeline" />
+
+  <details open>
+    <summary>We built it from scratch anyway</summary>
+
+    <p>The industrial approach to machine learning is to send your data to the cloud and receive a fully trained model back. But what if the entire pipeline could run on the microcontroller itself?</p>
+
+    <p>With the help of LLMs, I built the entire training and inference pipeline from scratch on the XIAO ML Kit. I must acknowledge Vijay Reddi, a member of AiEng4D, whose tinyTorch project and mlsysbook.ai inspired that from-scratch philosophy.</p>
+
+    <div class="accent-green">
+      <p>The XIAO ML Kit is built around the Seeed Studio XIAO ESP32S3 Sense — a microcontroller that costs <strong>under $15 USD</strong>. That price matters. A school can equip a classroom without a massive grant. A student can experiment. A teacher can replace broken parts.</p>
+    </div>
+
+    <p>Working pipelines we have today:</p>
+    <ul class="checklist">
+      <li>Vision classification</li>
+      <li>Vision object detection — FOMO with XY coordinates</li>
+      <li>Anomaly detection</li>
+      <li>Sound classification</li>
+      <li>Motion classification</li>
+    </ul>
+
+    <div class="accent-sky">
+      The first WebSerial training system took <strong>147 versions</strong>. That is also part of the lesson. Real technology is not created perfectly the first time. You build. You test. You improve. You learn.
+    </div>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 6 · LOCAL AI
+───────────────────────────────────────────── -->
+<a name="6" href="#6"></a>
+<div class="slide">
+  <div class="slide-num">Slide 6 of 9 — Local AI</div>
+  <h3>Local LLM Demo · Gemma 2B and 12B via PWA</h3>
+  <h2>Teenagers are already using AI assistants. The question is whether they understand these tools — or become dependent on them.</h2>
+
+  <img src="a06-analog-firewall.png" alt="Local LLM running as a PWA" />
+
+  <details open>
+    <summary>A student computer as a private AI lab</summary>
+
+    <p>Why not load an LLM locally using an installable webpage — a Progressive Web App? A student computer becomes a private AI lab assistant without sending every question and every piece of student data somewhere else.</p>
+
+    <div class="accent-sky">
+      <strong>Privacy alone makes this worth doing.</strong> But the deeper idea is this: if advanced AI requires a few enormous companies, most people become consumers. If we can put AI tools into classrooms everywhere, students become creators.
+    </div>
+
+    <p>
+      <span class="pill">Gemma4:e2b as a webpage PWA</span>
+      <span class="pill">ollama-gemma4:12b as a webpage PWA</span>
+    </p>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 7 · SCHOLARSHIP STORY (was slide 9)
+───────────────────────────────────────────── -->
+<a name="7" href="#7"></a>
+<div class="slide">
+  <div class="slide-num">Slide 7 of 9 — What Happens When Adults Step Back</div>
+  <h3>What I Learned From Stepping Back</h3>
+  <h2>In 30 years of teaching, I had never had a student win a major scholarship. Then I took a semester off.</h2>
+
+  <img src="a09-ai-scaffold.png" alt="Students working independently" />
+
+  <details open>
+    <summary>The most important thing I ever did was get out of the way</summary>
+
+    <p>Last year I took a semester off. I was not there to quickly solve my students' problems. They struggled — but they learned deeper.</p>
+
+    <div class="scholarship-box">
+      <div class="award">🏆 Canadian Schulich Scholarship — Grade 12 student</div>
+      <div class="award">🏆 Canadian Loran Scholarship — Grade 11 student</div>
+      <p style="margin-top:10px; color:#555; font-size:0.95rem;">From that same class: two students received over $100,000 CAD in scholarships — in a single year.</p>
+    </div>
+
+    <div class="accent-gold">
+      <strong>That taught me something important.</strong> I am the least important part of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture — those are the important parts.
+    </div>
+
+    <p>Remember: no strain, no gain — cognitive, social, emotional, or physical. Those scholarship students were impressive without my course. But the course may have helped them realize how capable they were.</p>
+
+    <p><em>I stepped back so my students could step up. And when they did, they won major national scholarships.</em></p>
+
+    <div class="accent-green">
+      <strong>This course proves how capable you already are — when adults get out of your way.</strong>
+    </div>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 8 · THE PILOT PROPOSAL / YOUR CHALLENGE
+───────────────────────────────────────────── -->
+<a name="8" href="#8"></a>
+<div class="slide">
+  <div class="slide-num">Slide 8 of 9 — Your Leadership Challenge</div>
+  <h3>The Pilot Proposal · Maker100 Leaders Robotics Needs Leaders</h3>
+  <h2>You are in one of the best places on the planet to make this happen.</h2>
+
+  <img src="a08-three-pathways.png" alt="Three pathways to joining the pilot" />
+
+  <details open>
+    <summary>Here is what you need to start</summary>
+
+    <ul class="checklist">
+      <li>At least three pre-engineers willing to work hard</li>
+      <li>3 to 30 students, grades 9 to 12</li>
+      <li>~$200 USD per student to start; ~$50 USD each year or semester for replacement parts — yes, we break things; that is part of the learning</li>
+      <li>Access to a computer lab, ideally with a 3D printer</li>
+      <li>A teacher sponsor willing to be a co-learner, not a lecturer — someone ready to tackle these challenges side-by-side with you</li>
+    </ul>
+
+    <div class="accent-green">
+      <strong>My commitment:</strong> If your teacher is willing to learn and complete the work, I will support that class three times during the first course — at the start for safety, in the middle when students hit problems they cannot solve alone, and near the end for the most challenging Level 2 assignments. If your instructor is already an Arduino wizard with an Edge Impulse login, they may want to run the course independently and connect next year.
+    </div>
+
+    <div class="accent-sky">
+      Calculate your student count. Calculate your total cost. Solve the funding problem. That is not my job — but <strong>knowing where the money comes from is your first real leadership challenge.</strong>
+    </div>
+  </details>
+</div>
+<hr class="slide-rule">
+
+
+<!-- ─────────────────────────────────────────────
+     SLIDE 9 · CLOSING
+───────────────────────────────────────────── -->
+<a name="9" href="#9"></a>
+<div class="slide">
+  <div class="slide-num">Slide 9 of 9 — Closing</div>
+  <h3>In One Year, We Meet Again</h3>
+  <h2>Leadership — locally, and then for the world.</h2>
+
+  <img src="a10-classroom.png" alt="Students leading in the classroom" />
+
+  <details open>
+    <summary>The question is not for me</summary>
+
+    <p>In one year, we meet again. Some schools will have tried. All will have struggled. Some students will have created things none of us expected.</p>
+
+    <div class="accent-green">
+      <strong>The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built?</strong>
+    </div>
+
+    <p>The schools that succeed here won't just celebrate their own wins — they will become the blueprint to scale this globally, to raise the funds for those who couldn't start today.</p>
+
+    <p><strong>First, you build for your community. Then, you lead for the world.</strong></p>
+
+    <p>That question is not for me. It is for the leaders in this room.</p>
+
+    <div class="accent-red">
+      We need the third student at the table. We need the voice no one expected. We need the person who sees the simple truth the experts miss.<br><br>
+      <strong>Don't let the future fail because of a bad red wire.</strong>
+    </div>
+
+    <p style="text-align:center; margin-top:24px; font-size:1.1rem; color: var(--green);">Thank you.</p>
+
+    <div class="cta-box">
+      <h3>Want your school to be one of the six?</h3>
+      <p>Talk to Jeremy Ellis after this session — or scan the QR code below.</p>
+    </div>
+
+    <div style="text-align:center; margin-top:24px;">
+      <a href="https://hpssjellis.github.io/maker100-leaders-robotics/public/index.html">
+        <img height="300" alt="QR code — scan to open the course repository" src="qr-maker100-leaders.png" style="display:inline-block;" />
+      </a>
+      <p style="font-family:'Courier New',monospace; font-size:12px; color:#666; margin-top:8px;">
+        hpssjellis.github.io/maker100-leaders-robotics
+      </p>
+    </div>
+  </details>
+</div>
+
+<br><br><br><br>
+<hr class="slide-rule">
+
+</div><!-- end #myMain -->
+
+<!-- ── Footer ── -->
+<div id="footer">
+  <h3>Jeremy Ellis</h3>
+  <a href="https://ca.linkedin.com/in/jeremy-ellis-4237a9bb">LinkedIn: jeremy-ellis-4237a9bb</a> &nbsp;|&nbsp;
+  <a href="https://github.com/hpssjellis">GitHub: hpssjellis</a> &nbsp;|&nbsp;
+  <a href="https://github.com/webmcu-ai">webmcu-ai</a><br>
+  arXiv: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a><br>
+  <a href="https://webmcu-ai.github.io/webmcu-vision-pwa/index.html">WebSerial Vision on-device demo</a> &nbsp;|&nbsp;
+  <a href="https://github.com/hpssjellis/maker100-leaders-robotics">The Course</a><br>
+  <a href="https://webmcu-ai.github.io/local-gemma4-pwa/index.html">Gemma4:e2b as a webpage PWA</a> &nbsp;|&nbsp;
+  <a href="https://webmcu-ai.github.io/ollama-gemma4-12b-pwa/index.html">ollama-gemma4:12b as a webpage PWA</a><br><br>
+  Use at your own risk.
+</div>
+
+<a name="top"></a>
+
+<!-- ── Scripts ── -->
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src="https://code.responsivevoice.org/responsivevoice.js"></script>
+
+<script>
+  // Show controls button at page load
+  document.getElementById('myStick').style.display = 'flex';
+
+  let myIndex = 1;
+  let myLooper = 0;
+  let myCounting = 0;
+  let myMainNumLast = 90;
+  let myCountUp = 0;
+  let xSlide = 9;
+  let myMainNum = [];
+  let myAudio01 = new Audio();
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+
+  // Build voice selector once responsiveVoice is ready
+  window.addEventListener('load', function() {
+    try {
+      let myArray = [1,2,3,13,14,16,18,22,23,24,29,30,34,37,39,42,43,49,54,57];
+      let myVoiceObject = responsiveVoice.getVoices();
+      let myTemp = '';
+      for (let i = 0; i < Math.min(60, myVoiceObject.length); i++) {
+        if (myArray.includes(i)) {
+          myTemp += '<option value="' + i + '">' + i + ' : ' + myVoiceObject[i].name + '</option>';
+        }
+      }
+      document.getElementById('mySelect01').innerHTML = myTemp;
+    } catch(e) {}
+  });
+
+  function mySetup() {
+    xSlide = parseInt(document.getElementById('myCountLinks').value.trim(), 10);
+    let dStr = document.getElementById('myCountMax').value;
+    myMainNum = dStr.split(',').map(function(s){ return parseInt(s.trim(), 10); });
+    myMainNumLast = myMainNum[0] || 90;
+    myAudio01.pause();
+    myAudio01.currentTime = 0;
+    myIndex = 0;
+    clearInterval(myLooper);
+    clearInterval(myCounting);
+    myCountUp = -1;
+  }
+
+  function carousel() {
+    clearInterval(myCounting);
+    myCountUp = -1;
+    myIndex++;
+    if (myIndex > xSlide) { myIndex = xSlide; }
+    window.location.href = '#' + myIndex;
+    if (!isNaN(myMainNum[myIndex - 1])) {
+      myMainNumLast = myMainNum[myIndex - 1];
+    }
+    myCountDown();
+    myCounting = setInterval(myCountDown, 1000);
+    myLooper = setTimeout(carousel, myMainNumLast * 1000);
+  }
+
+  function resumeCarousel() {
+    myCounting = setInterval(myCountDown, 1000);
+    var remaining = (myMainNumLast - myCountUp) * 1000;
+    myLooper = setTimeout(carousel, remaining);
+  }
+
+  function myCountDown() {
+    myCountUp++;
+    if (myCountUp >= myMainNumLast) { myCountUp = myMainNumLast; }
+    let showBtn = '<input type="button" value="Controls" style="height:18px;font-size:11px;" onclick="document.getElementById(\'myStick\').style.display=\'flex\';">';
+    if (myIndex >= xSlide && myMainNumLast == myCountUp) {
+      document.getElementById('myNumSlides').innerHTML =
+        '&nbsp;&nbsp; Slide ' + myIndex + ' of ' + xSlide + ' — ALL DONE &nbsp;' + showBtn;
+      clearInterval(myCounting);
+      clearInterval(myLooper);
+    } else {
+      document.getElementById('myNumSlides').innerHTML =
+        '&nbsp;&nbsp; Slide ' + myIndex + ' of ' + xSlide + ' &nbsp;·&nbsp; ' +
+        (myMainNumLast - myCountUp) + 's remaining &nbsp;' + showBtn;
+    }
+  }
+
+  function myNext() {
+    xSlide = parseInt(document.getElementById('myCountLinks').value.trim(), 10);
+    let dStr = document.getElementById('myCountMax').value;
+    myMainNum = dStr.split(',').map(function(s){ return parseInt(s.trim(), 10); });
+    clearInterval(myLooper);
+    clearInterval(myCounting);
+    carousel();
+  }
+
+  function closeAllDetails() {
+    document.querySelectorAll('details').forEach(function(d){ d.open = false; });
+  }
+
+  function openAllDetails() {
+    document.querySelectorAll('details').forEach(function(d){ d.open = true; });
+  }
+</script>
+
+</body>
+</html>
