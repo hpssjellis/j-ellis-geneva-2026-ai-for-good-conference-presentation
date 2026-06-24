@@ -255,15 +255,21 @@ In 2026 my students completed 45 assignments before starting their final project
 <img height="500" alt="" src="./media/xiaoml-kit.jpg" />
 
 <br><br><details open><summary><b>The industrial approach to machine learning is to send your data to the cloud and receive a fully trained model back.</b></summary>
-But what if the entire pipeline could run on the microcontroller itself?
+
+The traditional TinyML workflow is still an important part of this course. Students use tools like Edge Impulse and SenseCraft to experience the industry approach: 
+collecting data, training models, and deploying inference. Those tools are powerful because they let students build useful systems quickly.
+
+Then we ask a deeper question: what happens if we remove the black box and let students build the pipeline themselves on the microcontroller?
 
 Many would say that's impossible. TensorFlow Lite is too large, the hardware too constrained. But I wanted to understand it from first principles. With the help of LLMs, 
 I built the complete training and inference pipeline from the mathematical foundations up, directly on the XIAO ML Kit. 
-No TensorFlow. No hidden training service. Students can see the whole process: data collection, floating-point calculations, backpropagation, optimization, and inference.
+No TensorFlow. No hidden training service. Students can see the whole process: energy use, data collection, floating-point calculations, backpropagation, optimization, and inference.
 
-I was inspired by Vijay Reddi's tinyTorch work and <a href="https://mlsysbook.ai/">mlsysbook.ai</a>, which showed that students could understand machine learning by building the pieces themselves. I adapted that philosophy into Arduino-compatible code.
+I was inspired by Vijay Reddi's tinyTorch work and <a href="https://mlsysbook.ai/">mlsysbook.ai</a>, which showed that students could understand machine learning by building the pieces themselves. 
+I adapted that philosophy into Arduino-compatible code. ArXiv Papers: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &amp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a>
 
-The XIAO ML Kit is built around the Seeed Studio XIAO ESP32S3 Sense, a microcontroller that costs under $15 USD. That price matters. A school can equip a classroom without a massive grant. A student can experiment. A teacher can replace broken parts.
+The XIAO ML Kit is built around the Seeed Studio XIAO ESP32S3 Sense, a microcontroller that costs under $15 USD. That price matters. A school can equip a classroom without a massive grant. 
+A student can experiment. A teacher can replace broken parts.
 
 We have working pipelines for:
 <ul>
@@ -297,7 +303,7 @@ A student computer becomes a private AI lab assistant without sending every ques
 Demo: Local Gemma 2B and 12B via PWA
 
 Privacy alone makes this worth doing. But the deeper idea is this:   If students only experience AI through a few enormous platforms, they become consumers of tools they do not understand. 
-If we can put AI tools into classrooms everywhere, students can become creators.
+If we can put AI tools into classrooms everywhere, more students can become creators.
 
 </details>
 
@@ -317,10 +323,10 @@ Last year I took a semester off. I was not there to quickly solve my students' p
 
 From that class, two students received over $100,000 in Canadian scholarships: a grade 12 girl won the Canadian Schulich Scholarship, and a grade 11 boy won the Canadian Loran Scholarship.
 
-That taught me something important. I am the least important part of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture, those are the important parts.
+That taught me something important. I am not the center of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture, those are the important parts.
 
 Remember: no strain, no gain: cognitive, social, emotional, or physical. Those scholarship students were already impressive. I am not claiming this course created their success. 
-  What surprised me was seeing what happened when the teacher stopped being the center of the learning.
+What surprised me was seeing what happened when the teacher stopped being the center of the learning.
 
 I stepped back so my students could step up. And when they did, they won major national scholarships.
 
@@ -369,7 +375,11 @@ At least three pre-engineers willing to work hard
 <br><br><details open><summary><b>Leadership locally and Globally</b></summary>
 In one year, we meet again. Some schools will have tried. All will have struggled. Some students will have created things none of us expected.
 
-The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built? The schools that succeed here won't just celebrate their own wins, they will become the blueprint to scale this globally to raise the funds for those who couldn't start today.
+The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built? 
+  
+The schools that succeed here won't just celebrate their own wins, they will become the blueprint to scale this globally to raise the funds for those who couldn't start today.
+ 
+This pilot is not a rollout. It is a measurement phase. Six schools will show us what works, what breaks, and what must change before scaling.
 
 First, you build for your community. Then, you lead for the world. That question is not for me. It is for the leaders in this room.
 
