@@ -27,7 +27,7 @@ Then choose the Speaker: <Select id="mySelect01" onchange="{
   document.getElementById('myNumberSpeak').click()
 }"></select><br>
 
-<div id="myDiv01">...</div>
+<div id="myDiv01"></div>
 Voice number: <input id="myVoiceNum" type=number  style="width: 5em" value=3>
 <input id="myNumberSpeak" type="button" value="Speak!" onclick="{
     let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name
