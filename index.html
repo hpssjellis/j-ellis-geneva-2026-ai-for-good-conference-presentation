@@ -124,6 +124,8 @@ QR code to this presentation <a href="https://hpssjellis.github.io/j-ellis-genev
 <button onclick="closeAllDetails()">Close All</button>
 <button onclick="openAllDetails()">Open All</button>
 
+<input type="button" value="Export PPTX" onclick="myExportPptx()">
+
 </div>
 
 
@@ -566,7 +568,9 @@ QR code to this presentation:<br>
 
 <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
-
+ 
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+ 
 
 <script>
  let myIndex = 1;
@@ -668,6 +672,320 @@ function openAllDetails() {
         detail.open = true;
     });
 }
+
+
+
+
+
+
+
+
+async function myExportPptx() {
+
+    var pptx = new PptxGenJS();
+    pptx.layout  = 'LAYOUT_16x9';
+    pptx.title   = 'Maker100 Leaders Robotics — AI for Good Geneva 2026';
+    pptx.author  = 'Jeremy Ellis';
+
+    // ── Helper: resolve any src to an absolute URL then fetch as base64 ──
+    async function myFetchImageBase64(mySrc) {
+      if (!mySrc) { return null; }
+      // Resolve relative paths against the page's own URL
+      var myAbsUrl = '';
+      try {
+        myAbsUrl = new URL(mySrc, window.location.href).href;
+      } catch(e) {
+        myAbsUrl = mySrc;
+      }
+      // Skip YouTube thumbnails
+      if (myAbsUrl.includes('ytimg.com'))   { return null; }
+      if (myAbsUrl.includes('youtube.com')) { return null; }
+      console.log('Fetching image:', myAbsUrl);
+      try {
+        var myResp = await fetch(myAbsUrl);
+        if (!myResp.ok) {
+          console.log('Fetch failed, status:', myResp.status, myAbsUrl);
+          return null;
+        }
+        var myBlob = await myResp.blob();
+        return await new Promise(function(myResolve) {
+          var myReader = new FileReader();
+          myReader.onloadend = function() { myResolve(myReader.result); };
+          myReader.readAsDataURL(myBlob);
+        });
+      } catch(e) {
+        console.log('Fetch error:', myAbsUrl, e);
+        // ── Fallback: draw image via canvas to get base64 ──
+        // This works for same-origin images even when fetch is blocked
+        return await myCanvasBase64(myAbsUrl);
+      }
+    }
+
+    // ── Fallback: load image into a canvas and export as PNG base64 ──
+    async function myCanvasBase64(myAbsUrl) {
+      return await new Promise(function(myResolve) {
+        var myImg = new Image();
+        myImg.crossOrigin = 'anonymous';
+        myImg.onload = function() {
+          try {
+            var myCanvas = document.createElement('canvas');
+            myCanvas.width  = myImg.naturalWidth  || myImg.width  || 300;
+            myCanvas.height = myImg.naturalHeight || myImg.height || 200;
+            var myCtx = myCanvas.getContext('2d');
+            myCtx.drawImage(myImg, 0, 0);
+            myResolve(myCanvas.toDataURL('image/png'));
+          } catch(e) {
+            console.log('Canvas export failed:', myAbsUrl, e);
+            myResolve(null);
+          }
+        };
+        myImg.onerror = function() {
+          console.log('Image load error:', myAbsUrl);
+          myResolve(null);
+        };
+        // Add cache-busting param to encourage CORS headers on some servers
+        myImg.src = myAbsUrl + (myAbsUrl.includes('?') ? '&' : '?') + '_cb=' + Date.now();
+      });
+    }
+
+    // ── Helper: guess image extension from URL ──
+    function myImageExt(mySrc) {
+      var myS = (mySrc || '').toLowerCase().split('?')[0];
+      if (myS.endsWith('.jpg') || myS.endsWith('.jpeg')) { return 'jpg'; }
+      if (myS.endsWith('.gif'))  { return 'gif';  }
+      if (myS.endsWith('.webp')) { return 'webp'; }
+      return 'png';
+    }
+
+    // ── Helper: extract YouTube video ID from thumbnail URL ──
+    function myYouTubeId(mySrc) {
+      var myMatch = (mySrc || '').match(/\/vi\/([^\/]+)\//);
+      return myMatch ? myMatch[1] : null;
+    }
+
+    // ── Helper: convert <table> element to pptxgenjs rows array ──
+    function myTableToRows(myTableEl) {
+      var myRows = [];
+      myTableEl.querySelectorAll('tr').forEach(function(myTr) {
+        var myRow = [];
+        myTr.querySelectorAll('th, td').forEach(function(myCell) {
+          var myIsHeader = (myCell.tagName === 'TH');
+          myRow.push({
+            text: myCell.innerText.trim(),
+            options: {
+              bold:     myIsHeader,
+              fontSize: myIsHeader ? 10 : 9,
+              fill:     { color: myIsHeader ? '2E75B6' : 'FFFFFF' },
+              color:    myIsHeader ? 'FFFFFF' : '000000',
+              align:    'left',
+              valign:   'middle'
+            }
+          });
+        });
+        if (myRow.length > 0) { myRows.push(myRow); }
+      });
+      return myRows;
+    }
+
+    // ── Find all slide <h3> elements (those containing a named anchor) ──
+    var myH3List = Array.from(document.querySelectorAll('h3')).filter(function(myH3) {
+      return myH3.querySelector('a[name]') !== null;
+    });
+
+    for (var myIdx = 0; myIdx < myH3List.length; myIdx++) {
+
+      var myH3        = myH3List[myIdx];
+      var mySlideLabel = myH3.innerText.trim();
+
+      // ── Walk siblings until next <h3> collecting all elements ──
+      var myH2        = null;
+      var myImgEl     = null;
+      var myDetailsEl = null;
+      var myTableEl   = null;
+      var myYtIds     = [];
+
+      var mySib = myH3.nextElementSibling;
+      while (mySib) {
+        // Stop at the next slide's h3
+        if (mySib.tagName === 'H3' && mySib.querySelector('a[name]')) { break; }
+
+        if (mySib.tagName === 'H2' && !myH2) {
+          myH2 = mySib;
+        }
+
+        else if (mySib.tagName === 'IMG') {
+          var myYtId = myYouTubeId(mySib.src);
+          if (myYtId) {
+            if (!myYtIds.includes(myYtId)) { myYtIds.push(myYtId); }
+          } else if (!myImgEl) {
+            myImgEl = mySib;
+          }
+        }
+
+        else if (mySib.tagName === 'DETAILS' && !myDetailsEl) {
+          myDetailsEl = mySib;
+          if (!myTableEl) {
+            var myInnerTable = mySib.querySelector('table');
+            if (myInnerTable) { myTableEl = myInnerTable; }
+          }
+        }
+
+        else if (mySib.tagName === 'TABLE' && !myTableEl) {
+          myTableEl = mySib;
+        }
+
+        else if (mySib.tagName === 'DIV') {
+          // Video player divs — find YouTube thumbnails inside
+          mySib.querySelectorAll('img').forEach(function(myDivImg) {
+            var myDivYtId = myYouTubeId(myDivImg.src);
+            if (myDivYtId) {
+              if (!myYtIds.includes(myDivYtId)) { myYtIds.push(myDivYtId); }
+            } else if (!myImgEl) {
+              myImgEl = myDivImg;
+            }
+          });
+        }
+
+        mySib = mySib.nextElementSibling;
+      }
+
+      // ── Extract text content ──
+      var mySlideTitle  = myH2 ? myH2.innerText.trim() : '';
+      var mySummaryText = '';
+      var myNotesText   = '';
+
+      if (myDetailsEl) {
+        var mySummaryEl = myDetailsEl.querySelector('summary');
+        if (mySummaryEl) { mySummaryText = mySummaryEl.innerText.trim(); }
+        var myClone = myDetailsEl.cloneNode(true);
+        var myCloneSummary = myClone.querySelector('summary');
+        if (myCloneSummary) { myCloneSummary.remove(); }
+        var myCloneTable = myClone.querySelector('table');
+        if (myCloneTable) { myCloneTable.remove(); }
+        myNotesText = myClone.innerText.trim();
+      }
+
+      // ── Fetch image ──
+      var myImageData = null;
+      var myImageExtStr = 'png';
+      if (myImgEl) {
+        // Use the browser-resolved .src (always absolute) not the HTML attribute
+        var myResolvedSrc = myImgEl.src;
+        console.log('Slide ' + (myIdx+1) + ' image src resolved to: ' + myResolvedSrc);
+        myImageData   = await myFetchImageBase64(myResolvedSrc);
+        myImageExtStr = myImageExt(myResolvedSrc);
+      }
+
+      // ── Layout ──
+      var myHasImage = (myImageData !== null);
+      var myTextW    = myHasImage ? 5.6 : 9.2;
+
+      // ── Build slide ──
+      var mySlide = pptx.addSlide();
+      mySlide.background = { color: '87CEEB' };
+
+      // Slide label
+      mySlide.addText(mySlideLabel, {
+        x: 0.3, y: 0.05, w: 9.2, h: 0.3,
+        fontSize: 10, color: '333333', fontFace: 'Courier New'
+      });
+
+      // Title
+      if (mySlideTitle) {
+        mySlide.addText(mySlideTitle, {
+          x: 0.3, y: 0.4, w: myTextW, h: 2.0,
+          fontSize: 22, bold: true, color: '000000',
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Summary bold intro
+      if (mySummaryText) {
+        mySlide.addText(mySummaryText, {
+          x: 0.3, y: 2.5, w: myTextW, h: 0.9,
+          fontSize: 14, bold: true, color: '1a1a1a',
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Video-only label
+      if (!mySlideTitle && !mySummaryText && myYtIds.length > 0) {
+        mySlide.addText('Video Demo — see link below', {
+          x: 0.3, y: 0.4, w: 9.2, h: 0.7,
+          fontSize: 20, italic: true, color: '444444'
+        });
+      }
+
+      // YouTube links as clickable text on slide
+      myYtIds.forEach(function(myId, myI) {
+        var myUrl = 'https://www.youtube.com/watch?v=' + myId;
+        mySlide.addText('▶  Watch: ' + myUrl, {
+          x: 0.3, y: 1.3 + (myI * 0.6), w: 9.0, h: 0.5,
+          fontSize: 14, color: '0563C1',
+          hyperlink: { url: myUrl }
+        });
+      });
+
+      // Image — right column, contain scaling
+      if (myHasImage) {
+        mySlide.addImage({
+          data:   myImageData,
+          x:      6.0,
+          y:      0.4,
+          w:      3.7,
+          h:      4.9,
+          sizing: { type: 'contain', w: 3.7, h: 4.9 }
+        });
+      }
+
+      // Table
+      if (myTableEl) {
+        var myRows = myTableToRows(myTableEl);
+        if (myRows.length > 0) {
+          mySlide.addTable(myRows, {
+            x: 0.3, y: 3.55, w: 9.2,
+            fontSize: 9,
+            border: { type: 'solid', color: '888888', pt: 0.5 },
+            autoPage: false
+          });
+        }
+      }
+
+      // Speaker notes
+      var myFullNotes = '';
+      if (mySummaryText) { myFullNotes += mySummaryText + '\n\n'; }
+      if (myNotesText)   { myFullNotes += myNotesText + '\n\n'; }
+      myYtIds.forEach(function(myId) {
+        myFullNotes += 'YouTube: https://www.youtube.com/watch?v=' + myId + '\n';
+      });
+      if (myFullNotes.trim()) { mySlide.addNotes(myFullNotes.trim()); }
+
+    } // end for each slide
+
+    // ── Final links slide ──
+    var myFooterSlide = pptx.addSlide();
+    myFooterSlide.background = { color: '87CEEB' };
+    myFooterSlide.addText('Jeremy Ellis — AI for Good Geneva 2026', {
+      x: 0.4, y: 0.3, w: 9.2, h: 0.55,
+      fontSize: 22, bold: true, color: '000000'
+    });
+    myFooterSlide.addText(
+      'Presentation:\nhttps://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html\n\n' +
+      'Course:     github.com/hpssjellis/maker100-leaders-robotics\n' +
+      'WebMCU-AI:  github.com/webmcu-ai\n' +
+      'arXiv:      2604.23012  ·  2604.22834\n' +
+      'LinkedIn:   jeremy-ellis-4237a9bb',
+      {
+        x: 0.4, y: 1.0, w: 9.2, h: 4.2,
+        fontSize: 14, color: '111111',
+        valign: 'top', wrap: true
+      }
+    );
+
+    pptx.writeFile({ fileName: 'maker100-leaders-robotics-geneva2026.pptx' });
+
+  } // end myExportPptx
+  
 </script>
 
 </body>
