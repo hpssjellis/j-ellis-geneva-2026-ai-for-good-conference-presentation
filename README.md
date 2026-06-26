@@ -5,6 +5,25 @@ leaders-robotics-geneva-2026-ai-for-good-conference-presentation
 Presentation as a webpage at  https://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html
 
 
+A bare slide entry
+
+```
+
+
+<h3> <a name="4" href="#4">4 </a> <br><br>       </h3>
+<h2>     </h2>
+
+<img height="300" alt="" src="./media/maker100.png" />
+
+<br><br><details open><summary><b>       </b></summary>
+
+
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+```
 
 
 
