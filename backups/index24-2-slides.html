@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>Maker100 Leaders Robotics AI for Good Geneva 2026</title></head>
+<body>
+
+<h1>Maker100 Leaders Robotics. A Global Six-School Pilot, By Jeremy Ellis</h1>
+
+This presentation is at <a href="https://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html">https://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html</a><br>
+The Maker100 course is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">https://github.com/hpssjellis/maker100-leaders-robotics</a><br>
+The WebMCU-AI Repository is at <a href="https://github.com/webmcu-ai">https://github.com/webmcu-ai</a><br><br>
+
+  
+Number of Slides: <input type="text" id="myCountLinks" size="6" value="14" >. List of seconds per slide: <input type="text" id="myCountMax" size="30" value="90,60,90,90,120,90,90,90,90,90" >   Can be a list of seconds example: 17, 20, 24, 20 The last number continues.
+<br><br>
+
+Choose the language: <div id="google_translate_element"></div>
+
+<script type="text/javascript">
+document.myVoiceVar = 7
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script><br>
+
+Then choose the Speaker: <Select id="mySelect01" onchange="{
+  document.getElementById('myVoiceNum').value =  this.value
+  document.getElementById('myNumberSpeak').click()
+}"></select><br>
+
+<div id="myDiv01"></div>
+Voice number: <input id="myVoiceNum" type=number  style="width: 5em" value=3>
+<input id="myNumberSpeak" type="button" value="Speak!" onclick="{
+    let myV = responsiveVoice.getVoices()[document.getElementById('myVoiceNum').value].name
+    document.getElementById('myDiv01').innerHTML =  myV
+    responsiveVoice.speak(document.getElementById('myMain').innerText, myV, {pitch: 1, rate: 1, volume : 1});
+}">
+
+<br><br>
+
+<h2>This section readers have programmed autoscroll</h2>
+
+<input type=button value="Jeremy Ellis Reading in English" onclick="{
+   document.getElementById('myCountMax').value = '100,72,100,120,100';
+   mySetup();
+   myAudio01 = new Audio('Maker100-presentation00.m4a');
+   myAudio01.play();
+   carousel();
+}">
+
+<br><br><br>
+QR code to this presentation <a href="https://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html">website</a><br>
+<img height="300" alt="QR code, scan to open presentation" src="./media/qrcode01.png" />
+<br><br><br>
+
+<div id="myNumSlides" style=" position:sticky; top:0px; left:20px; height:25px; "> ...</div>  <br>
+
+<div id="myStick"  style=" position:sticky; top:25px; display:inline; ">
+
+<input type=button value="Start-No-Sound" onclick="{
+   mySetup()
+   carousel();
+}">
+
+<input type=button value="Rewind" onclick="{
+   myIndex = 0;
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+}">
+
+<input type=button value="-" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   myIndex -= 1;
+   window.location.href='#'+myIndex;
+}">
+
+<input type=button value="+" onclick="{
+  clearInterval(myLooper);
+  clearInterval(myCounting);
+  myIndex += 1;
+  window.location.href='#'+myIndex;
+}">
+
+<input type=button value="Back" onclick="{
+   myIndex = myIndex - 2;
+   if (myIndex <= 0){myIndex=0};
+   myNext();
+}">
+
+<input type=button value="Next" onclick="{
+   myNext();
+}">
+
+<input id="myPause" type=button value="Pause" onclick="{
+   clearInterval(myLooper);
+   clearInterval(myCounting);
+   if (this.value == 'Pause'){
+       this.value = 'Play / Pause';
+       if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+      } else {
+         myAudio01.pause();
+     }
+   } else {
+     resumeCarousel();
+     this.value = 'Pause';
+     if (myAudio01.paused && myAudio01.currentTime > 0 && !myAudio01.ended) {
+         myAudio01.play();
+      }
+   }
+}">
+
+<input type=button value="Hide" onclick="{
+   document.getElementById('myStick').style.display = 'none';
+}">
+
+<input type=button value="TOP" onclick="{
+   window.location.href='#top';
+}">
+
+<button onclick="closeAllDetails()">Close All</button>
+<button onclick="openAllDetails()">Open All</button>
+
+<input type="button" value="Export PPTX" onclick="myExportPptx()">
+
+</div>
+
+
+<div id="myMain">
+
+
+<h1>Maker100 Leaders Robotics. A Global Six-School Pilot, By Jeremy Ellis</h1>
+
+<h3><a name="1" href="#1">1 </a> <br><br> The Red Wire Story</h3>
+<h2>Don't let the future fail because of a bad red wire.</h2>
+
+<img height="500" alt="Image of a Red Wire on a breadboard with the xiao esp32s3" src="./media/redwire3.png" />
+
+<br><br><details open><summary><b>A three-person team was falling apart over their final project.</b></summary>
+A robot arm with IoT sensors and a tiny vision ML loop. The leader was capable. The pre-engineer was meticulous. And yet the system kept failing, working one moment, collapsing the next.
+
+Beside them stood the third student. Quiet. Barely passing the course.
+
+After another failure, he spoke up gently: "What if the red wire isn't working?"
+
+The leader froze. You could feel the tension. The pre-engineer sighed, then said: "That is an easy test." And swapped the red wire to a different red breadboard wire.
+
+Instantly, the entire robot came alive. Smooth. Stable. Perfect.
+
+The breakthrough didn't come from expertise. It came from inclusion. From giving space to the voice no one expected to matter.
+
+Now imagine a world where only a handful of powerful cloud companies get to decide how we solve society's hardest problems. That's a world with only two students at the table.
+
+We need the third student. We need the unexpected insight. The simple truth that experts miss.
+
+Democratizing AI isn't optional. It's how we keep the future from failing because of a bad VCC line.
+
+And for the record, in my class we never throw away equipment students call broken. But that day, we held a small ceremony... and tossed that little red wire straight into the garbage.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3><a name="2" href="#2">2 </a> <br><br>Course Pilot, Six Schools, Six Countries, $200 per student.</h3>
+<h2>Maker100 Leaders: Robotics, ML &amp; IoT, A Global Pilot</h2>
+
+<img height="400" alt="" src="./media/six_schools_pilot_slide.png" />
+
+<br><br><details open><summary><b>6 Schools from 6 different countries. 3 to 30 students per school. Approximately $200 per student hardware cost.</b></summary>
+I am here today with a very specific mission.
+
+I am looking for exactly six schools, from six different countries, to pilot the Maker100 Leaders Robotics course for the upcoming academic year.
+
+Three to thirty students per school. Let's talk numbers upfront so there are no surprises: the hardware cost is roughly $200 USD per student plus tax and shipping for the XIAO ML kit and all supporting components, purchased by your school directly from online suppliers.
+
+I make absolutely nothing from the hardware. But I only support the platform I have stress-tested for years in my own classroom.
+
+We are here to launch this pilot, gather hard undeniable student data over one full year, and stand back on a stage like this next year to unlock the significant financial support needed to scale this globally.
+
+If you want your school or organization to be one of those six pioneers, watch closely.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3><a name="3" href="#3">3 </a><br><br> Who I Am And Why I'm Here</h3>
+<h2>I don't teach leaders. I put students in situations where they discover they already are one.</h2>
+
+<img height="300" alt="" src="./media/who_i_am_slide-v2.png" />
+
+<br><br><details open><summary><b>I am Jeremy Ellis. I have taught technology for over 30 years in British Columbia, Canada.</b></summary>
+I founded the GitHub organization webmcu-ai, a framework for fully on-device machine learning training. I help co-chair the AiEng4D Show and Tell, where Global South university students present their TinyML and Edge AI projects online.
+
+Today I am presenting a pilot project to bring my student-led robotics course to the Global South, and I am asking the student leaders in this room to help make it happen.
+
+Students today are looking at an uncertain future. They see artificial intelligence changing every industry. They have a choice: ride along with technology built by others, or learn how it works and become the people who build what comes next.
+
+Throughout my career I have watched that choice play out in classrooms. And I've learned something important.
+
+I don't teach pre-engineers, students who build things and love the complexity of math and physics. They teach me.
+
+This course is not just for pre-engineers, but anyone willing to solve problems, like leaders, makers and pre-engineers.  
+
+I also don't teach leaders. Leaders are students who look outward while digging deeper. 
+This course puts students into situations where they grow their leadership skills.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3> <a name="4" href="#4">4 </a> <br><br> The Course: Maker100 Leaders Robotics.</h3>
+<h2>The course is at <a href="https://github.com/hpssjellis/maker100-leaders-robotics">github.com/hpssjellis/maker100-leaders-robotics</a> open source, free, and can be updated.</h2>
+
+<img height="300" alt="" src="./media/maker100_course_slide-v2.png" />
+
+<br><br><details open><summary><b>This is not an easy course. That is the whole point.</b></summary>
+Students solve 40 to 60 robotics, machine learning, sensor, actuator, and IoT challenges, and then teach others their solutions.
+
+No full lectures. Students or the teacher record all 60-plus assignments on a public or private chart, solved in any order.
+
+  
+Once assignments are complete, students do Level 1 and Level 2 final projects. Level 1 is a course pass: single sensor, MCU, single actuator. 
+Level 2 earns the higher mark: multiple sensors/actuators with ML and or IoT. Multiple people are expected to reach the top grade. Group work is optional, often teacher assigned.
+  
+For most of the course students work collaboratively but on their own hardware, to avoid the group labour trap problem: where one student codes and the other student wires the board. 
+
+Our students learn the entire pipeline. In 2026 my students completed 45 assignments before starting their final projects. 
+I completed 8 more assignments for the top students to finish after their projects were done.
+
+
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+
+
+<h3> <a name="5" href="#5">5 </a> <br><br>   The Rule of Lead Three    </h3>
+<h2>   Learning is Collaborative  </h2>
+
+<img height="300" alt="" src="./media/maker100.png" />
+
+<br><br><details open><summary><b>   If you are the first person to solve an assignment, you must teach three others.     </b></summary>
+  
+Those three are responsible for helping three more. The maximum student mark of 90% gets closer to 100% as that classroom tone of collaboration increases.
+
+I am completely comfortable with ten students earning 100 percent. It hurts no one, and it massively improves classroom tone, communication, confidence, and joy.
+
+
+
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+  
+<h3> <a name="6" href="#6">6 </a> <br><br>    The Analog Firewall   </h3>
+<h2>  Handwritten Code Summarizies and drawn Circuit Diagrams Checked   </h2>
+
+<img height="300" alt="" src="./media/maker100.png" />
+
+<br><br><details open><summary><b>   The Analog Firewall makes technology educational    </b></summary>
+
+The Analog Firewall: The class always starts here. Code is summarized on paper before loading onto a microcontroller. Circuit diagrams are drawn by hand and checked by another student before wiring. Power is connected only after a second check.
+
+Why? Because thinking before acting is a professional habit. And because a hardware failure caught on paper costs nothing. A hardware failure caught after a short circuit has a real cost.
+
+
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+  
+
+
+<h3> <a name="7" href="#7">7 </a><br><br> On-Device Machine Learning</h3>
+<h2>Demo WebMCU-AI: The Full Machine Learning Pipeline on a $8-$22 USD Microcontroller</h2>
+
+<img height="300" alt="" src="./media/xiaoml-kit.jpg" />
+
+<br><br><details open><summary><b>A common industrial TinyML workflow is to collect data, train in the cloud, and deploy a compressed model back to an edge device.</b></summary>
+
+The traditional TinyML workflow is still an important part of this course. Students use tools like Edge Impulse and SenseCraft to experience the industry approach: 
+collecting data, training models, and deploying inference. Those tools are powerful because they let students build useful systems quickly.
+
+Then we ask a deeper question: what happens if we remove the black box and let students build the pipeline themselves on the microcontroller?
+
+Many would say that's impossible. TensorFlow Lite is too large, the hardware too constrained. But I wanted to understand it from first principles. With the help of LLMs, 
+I built the complete training and inference pipeline from the mathematical foundations up, directly on the XIAO ML Kit. 
+No TensorFlow. No hidden training service. Students can see the whole process: energy use, data collection, floating-point calculations, backpropagation, optimization, and inference.
+
+I was inspired by Vijay Reddi's tinyTorch work and <a href="https://mlsysbook.ai/">mlsysbook.ai</a>, which showed that students could understand machine learning by building the pieces themselves. 
+I adapted that philosophy into Arduino-compatible code. ArXiv Papers: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &amp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a>
+
+The XIAO ML Kit is built around the Seeed Studio XIAO ESP32S3 Sense, a microcontroller that costs under $15 USD. That price matters. A school can equip a classroom without a massive grant. 
+A student can experiment. A teacher can replace broken parts.
+
+We have working pipelines for:
+<ul>
+  <li>Vision classification</li>
+  <li>Vision object detection FOMO (with XY coordinates)</li>
+  <li>Anomaly detection (Difference measure)</li>
+  <li>Sound classification</li>
+  <li>Motion classification</li>
+  <li>Regression Inference (size or distance)</li>
+</ul>
+
+The first WebSerial training system took 147 versions. That is also part of the lesson. Real technology is not created perfectly the first time. You build. You test. You improve. You learn.
+</details>
+
+<br><br><br>
+<hr>
+
+<h3> <a name="8" href="#8">8 </a><br><br>  WebSerial Vision Classification    </h3>
+
+        <div style="width: 640px; text-align: center;">
+            <p style="font-weight: bold; margin-bottom: 8px; color: #333;">Demo: WebSerial Vision Classification</p>
+            <div id="myVid1" onclick="this.innerHTML='<iframe  width=640 height=360  src=\'https://www.youtube.com/embed/R--9WL-hWok?autoplay=1\' frameborder=0 allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'"
+                style="width: 640px; height: 360px; background: #000; cursor: pointer; position: relative;">
+                <img src="https://img.youtube.com/vi/R--9WL-hWok/mqdefault.jpg" style="width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:40px;background:rgba(0,0,0,0.7);color:#fff;text-align:center;line-height:40px;border-radius:8px;font-size:20px;">▶</div>
+            </div>
+        </div>
+
+
+<br><br><br><br><br><br><br><br><br>
+<hr>  
+
+
+<h3> <a name="9" href="#9">9 </a> <br><br> Local AI and Why It Matters.</h3>
+<h2>Teenagers are already using AI assistants. The question is whether they understand these tools, or become dependent on them.</h2>
+
+<img height="500" alt="" src="./media/local_ai_slide-v3.png" />
+
+<br><br><details open><summary><b>Local LLM Demo: Gemma 2B and 12B via PWA</b></summary>
+Why not load an LLM locally using an installable webpage, a Progressive Web App?
+
+A student computer becomes a private AI lab assistant without sending every question and every piece of student data somewhere else.
+
+Demo: Local Gemma 2B and 12B via PWA
+
+Privacy alone makes this worth doing. But the deeper idea is this:   If students only experience AI through a few enormous platforms, they become consumers of tools they do not understand. 
+If we can put AI tools into classrooms everywhere, more students can become creators.
+
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+<h3> <a name="10" href="#10">10 </a><br><br> Offline Ollama running Gemma4:12B from PWA webpage   </h3>
+
+        <div style="width: 640px; text-align: center;">
+            <p style="font-weight: bold; margin-bottom: 8px; color: #333;">Demo: Ollama from PWA webpage. Needs Ollama.com installed</p>
+            <div id="myVid2" onclick="this.innerHTML='<iframe  width=640 height=360  src=\'https://www.youtube.com/embed/XMPbJGTGS-I?autoplay=1\' frameborder=0 allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'"
+                style="width: 640px; height: 360px; background: #000; cursor: pointer; position: relative;">
+                <img src="https://img.youtube.com/vi/XMPbJGTGS-I/mqdefault.jpg" style="width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:40px;background:rgba(0,0,0,0.7);color:#fff;text-align:center;line-height:40px;border-radius:8px;font-size:20px;">▶</div>
+            </div>
+        </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<h3> <a name="11" href="#11">11 </a><br><br> Offline Gemma4 from webpage PWA Directly   </h3>
+  
+        <div style="width: 640px; text-align: center;">
+            <p style="font-weight: bold; margin-bottom: 8px; color: #333;">Demo: Gemma4 from PWA webpage only</p>
+            <div id="myVid3" onclick="this.innerHTML='<iframe  width=640 height=360  src=\'https://www.youtube.com/embed/EQROY5YoumI?autoplay=1\' frameborder=0 allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'"
+                style="width: 640px; height: 360px; background: #000; cursor: pointer; position: relative;">
+                <img src="https://img.youtube.com/vi/EQROY5YoumI/mqdefault.jpg" style="width:100%;height:100%;object-fit:cover;">
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:40px;background:rgba(0,0,0,0.7);color:#fff;text-align:center;line-height:40px;border-radius:8px;font-size:20px;">▶</div>
+            </div>
+        </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>  
+
+<h3> <a name="12" href="#12">12 </a><br><br> What I Learned From Stepping Back.</h3>
+<h2>In 30 years of teaching I had never had a student win a large scholarship. Then I took a semester off.</h2>
+
+<img height="200" alt="" src="./media/loran-schulich01.png" />
+
+<br><br><details open><summary><b>The most important thing I ever did was get out of the way.</b></summary>
+Last year I took a semester off. I was not there to quickly solve my students' problems. They struggled, but they learned deeper.
+
+From that class, two students received over $100,000 in Canadian scholarships: a grade 12 girl won the Canadian Schulich Scholarship, and a grade 11 boy won the Canadian Loran Scholarship.
+
+That taught me something important. I am not the center of this course. The hardware, the curriculum, the Lead Three, the Analog Firewall, and the classroom culture, those are the important parts.
+
+Remember: no strain, no gain: cognitive, social, emotional, or physical. Those scholarship students were already impressive. I am not claiming this course created their success. 
+What surprised me was seeing what happened when the teacher stopped being the center of the learning.
+
+I stepped back so my students could step up. And when they did, they won major national scholarships.
+
+This course proves how capable you already are when adults get out of your way.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+
+
+
+  
+
+
+<h3> <a name="13" href="#13">13 </a><br><br>  Teachers matter.    </h3>
+<h2> Just differently in year one.</h2>
+<img height="500" alt="" src="./media/teacher_role_evolution_slide02.png" />
+<br><br><details open><summary><b>The teacher steps back so students can step up, but they never disappear.</b></summary>
+
+In year one, the teacher is a technology counsellor and an emotional counsellor. They keep circuits safe and they name the struggle as growth. Deep hardware expertise is not required on day one.
+
+That is intentional. Microcontrollers are relevant for one to six years before something better arrives. Heavy teacher training tied to specific hardware does not survive a hardware generation. The course structure does.
+
+By year two, the teacher has lived it once. They know exactly where students get stuck. That becomes five-minute micro-lectures placed precisely at the real pain points, not lectures delivered before anyone needs them.
+
+Students who solve hard problems without being rescued build confidence that is portable. That is the whole point.
+
+</details>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+  
+
+
+<h3> <a name="14" href="#14">14 </a><br><br> The Pilot Proposal, Your Leadership Challenge</h3>
+<h2>Maker100 Leaders Robotics needs Leaders</h2>
+
+<img height="400" alt="" src="./media/solve-funding.png" />
+
+<br><br><details open><summary><b>You are in one of the best places on the planet to do that.</b></summary>
+Here is what you need:
+
+At least three pre-engineers willing to work hard
+<br>3 to 30 students, grades 9 to 12
+<br>~$200 USD per student + tax + shipping to start; ~$50 USD each year or semester for replacement parts. 
+  
+<br>Yes, we break things. That is part of the learning.
+<br>Access to a computer lab, ideally with a 3D printer
+<br>A teacher sponsor willing to be a co-learner, not a lecturer, someone ready to tackle these challenges side-by-side with you.
+
+<br><br>If your teacher is willing to learn and complete the work, I will support that class three times during the first course: at the start for safety, in the middle when students hit problems they cannot solve alone, and near the end for the most challenging Level 2 assignments. If your instructor is an Arduino wizard and already has an EdgeImpulse login, they may want to do the course without contact, and connect next year.
+
+<br>Calculate your student count, calculate your total cost, and solve the funding problem. That is not my job. But knowing where the money comes from is your first real leadership challenge.
+<br> The actual Hardware dynamic price list <a href="https://hpssjellis.github.io/maker100-leaders-robotics/price-list-2026.html"> https://hpssjellis.github.io/maker100-leaders-robotics/price-list-2026.html </a>
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3> <a name="15" href="#15">15 </a> <br><br>In Closing</h3>
+<h2>In one year, we meet again.</h2>
+
+<img height="400" alt="" src="./media/in_closing_slide_v2.png" />
+
+<br><br><details open><summary><b>Leadership locally and Globally</b></summary>
+In one year, we meet again. Some schools will have tried. All will have struggled. Some students will have created things none of us expected.
+
+The question is simple: Which leaders will stand here, armed with hard-won data, to tell us what their class built? 
+  
+The schools that succeed here won't just celebrate their own wins, they will become the blueprint to scale this globally to raise the funds for those who couldn't start today.
+ 
+This pilot is not a rollout. It is a measurement phase. Six schools will show us what works, what breaks, and what must change before scaling.
+
+First, you build for your community. Then, you lead for the world. That question is not for me. It is for the leaders in this room.
+
+We need the third student at the table. We need the voice no one expected. We need the person who sees the simple truth the experts miss.
+
+I am not arguing that everyone becomes an AI engineer. I am arguing that everyone deserves enough understanding to participate in the future.
+
+Don't let the future fail because of a bad red wire.
+
+Thank you.
+</details>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+
+
+<h3> <a name="16" href="#16">16 </a><br><br> Links and Resources</h3>
+<h2>Everything is open source and free.</h2>
+
+<br>
+QR code to this presentation:<br>
+<img height="300" alt="QR code, scan to open presentation" src="./media/qrcode01.png" />
+<br><br>
+
+<details open><summary><b>All links</b></summary>
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Resource</th>
+      <th>Link / Details</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Author</strong></td>
+      <td> <a href="https://ca.linkedin.com/in/jeremy-ellis-4237a9bb">Jeremy Ellis LinkedIn Profile</a></td>
+      <td><em></em></td>
+    </tr>
+    <tr>
+      <td><strong>GitHub Profile</strong></td>
+      <td><a href="https://github.com/hpssjellis">github.com/hpssjellis</a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><strong>On-Device webmcu-ai</strong></td>
+      <td><a href="https://github.com/webmcu-ai">github.com/webmcu-ai</a></td>
+      <td>arXiv Papers: <a href="https://arxiv.org/abs/2604.23012">2604.23012</a> &amp; <a href="https://arxiv.org/abs/2604.22834">2604.22834</a></td>
+    </tr>
+    <tr>
+      <td><strong>WebSerial Vision Demo</strong></td>
+      <td><a href="https://webmcu-ai.github.io/webmcu-vision-pwa/index.html">webmcu-vision-pwa</a></td>
+      <td>On-device and webSerial Vision ML Training demo webpage and PWA</td>
+    </tr>
+    <tr>
+      <td><strong>The Course</strong></td>
+      <td><a href="https://github.com/hpssjellis/maker100-leaders-robotics">maker100-leaders-robotics</a></td>
+      <td>This is the course the students work through</td>
+    </tr>
+    <tr>
+      <td><strong>The Curriculum</strong></td>
+      <td><a href="https://github.com/hpssjellis/maker100-curriculum">maker100-curriculum</a></td>
+      <td>This is the generic curriculum on Github</td>
+    </tr>
+    <tr>
+      <td><strong>Hardware Price List</strong></td>
+      <td><a href="https://hpssjellis.github.io/maker100-leaders-robotics/price-list-2026.html">Hardware price-list-2026</a></td>
+      <td>The bare essential hardware.</td>
+    </tr>
+    <tr>
+      <td><strong>Local LLM PWA Small ~2GB</strong></td>
+      <td>
+          <a href="https://webmcu-ai.github.io/local-gemma4-pwa/index.html">Gemma4:e2B PWA</a>
+      </td>
+      <td>Running as webpage PWAs</td>
+    </tr>
+    <tr>
+      <td><strong>Local LLM PWA Large ~7GB</strong></td>
+      <td>
+          <a href="https://webmcu-ai.github.io/ollama-gemma4-12b-pwa/index.html">Ollama Gemma4:12B PWA</a>
+      </td>
+      <td>Needs <a href="https://ollama.com/">Ollama</a> installed</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+  
+</details>
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<br><br><br><br><br><br><br><br><br>
+<hr>
+
+</div>
+<a href="#top">Top of page</a>
+
+
+
+  
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+
+
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+ 
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js"></script>
+ 
+
+<script>
+ let myIndex = 1;
+ let myLooper = 0;
+ let myCounting = 0;
+ let myMainNum = '10,10';
+ let myMainNum2 = '10,10';
+ let myMainNumLast = 20;
+ let myCountUp = 0;
+ let xSlide = 3;
+ let myAudio01 = new Audio();
+ document.body.style.backgroundColor = "skyblue";
+
+ let myArray = [1,2,3,13,14,16,18,2223,24,29,30,34,37,39,42,43,49,54,57]
+ let myVoiceObject = responsiveVoice.getVoices()
+ let myTemp = ''
+ for (let myLoop=0; myLoop < 50; myLoop++ ){
+    if ( myArray.includes(myLoop) ) {
+       myTemp += '<option value=\''+myLoop + '\'>' + myLoop + ' : ' + myVoiceObject[myLoop].name + '</option>'
+    }
+ }
+ document.getElementById('mySelect01').innerHTML =  myTemp
+
+
+function mySetup(){
+   document.getElementById('myStick').style.display = 'none';
+   xSlide  = document.getElementById('myCountLinks').value;
+   myMainNum = document.getElementById('myCountMax').value.split(',');
+   myMainNumLast = myMainNum[0]
+   console.log('myMainNum')
+   console.log(myMainNum)
+   console.log('myIndex, myMainNumLast, myMainNum[myIndex]')
+   myAudio01.pause();
+   myAudio01.currentTime = 0;
+   myIndex = 0;
+   clearInterval(myLooper);
+   myCountUp = -1;
+}
+
+function carousel() {
+  clearInterval(myCounting);
+  myCountUp = -1;
+  var i;
+  myIndex++;
+  if (myIndex > xSlide) {myIndex = xSlide};
+  window.location.href='#'+myIndex;
+  if (Number.isInteger( parseInt(myMainNum[myIndex-1]) ) ) {
+     myMainNumLast = parseInt(myMainNum[myIndex-1])
+  }
+  console.log(myIndex +', '+ myMainNumLast +', '+  myMainNum[myIndex-1])
+  myCountDown();
+  myCounting = setInterval(myCountDown, 1000);
+  myLooper = setTimeout(carousel, myMainNumLast*1000);
+}
+
+function resumeCarousel() {
+    myCounting = setInterval(myCountDown, 1000);
+    var remainingTime = (myMainNumLast - myCountUp) * 1000;
+    myLooper = setTimeout(carousel, remainingTime);
+}
+
+function myCountDown(){
+  myCountUp++;
+  if (myCountUp >= myMainNumLast ) {
+    myCountUp = myMainNumLast;
+  }
+  if (myIndex >= xSlide && myMainNumLast == myCountUp){
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ALL DONE <input type=button value="Show"  style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+     clearInterval(myCounting);
+     clearInterval(myLooper);
+  }
+  else {
+     document.getElementById("myNumSlides").innerHTML = `&nbsp;&nbsp;&nbsp; Slide ${myIndex} of ${xSlide} slides. ${myMainNumLast-myCountUp} seconds remaining <input type=button value="Show" style="height:20px; " onclick="{document.getElementById('myStick').style.display = 'inline'; }"> `;
+  }
+}
+
+function myNext(){
+    var slideCountString = document.getElementById('myCountLinks').value;
+    xSlide = parseInt(slideCountString.trim(), 10);
+    var durationString = document.getElementById('myCountMax').value;
+    myMainNum = durationString.split(',')
+        .map(function(item) {
+            return parseInt(item.trim(), 10);
+        });
+    clearInterval(myLooper);
+    carousel();
+}
+
+function closeAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = false;
+    });
+}
+
+function openAllDetails() {
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+        detail.open = true;
+    });
+}
+
+
+
+
+
+
+
+
+async function myExportPptx() {
+
+    var pptx = new PptxGenJS();
+    pptx.layout  = 'LAYOUT_16x9';
+    pptx.title   = 'Maker100 Leaders Robotics — AI for Good Geneva 2026';
+    pptx.author  = 'Jeremy Ellis';
+
+    // ── Helper: resolve any src to an absolute URL then fetch as base64 ──
+    async function myFetchImageBase64(mySrc) {
+      if (!mySrc) { return null; }
+      // Resolve relative paths against the page's own URL
+      var myAbsUrl = '';
+      try {
+        myAbsUrl = new URL(mySrc, window.location.href).href;
+      } catch(e) {
+        myAbsUrl = mySrc;
+      }
+      // Skip YouTube thumbnails
+      if (myAbsUrl.includes('ytimg.com'))   { return null; }
+      if (myAbsUrl.includes('youtube.com')) { return null; }
+      console.log('Fetching image:', myAbsUrl);
+      try {
+        var myResp = await fetch(myAbsUrl);
+        if (!myResp.ok) {
+          console.log('Fetch failed, status:', myResp.status, myAbsUrl);
+          return null;
+        }
+        var myBlob = await myResp.blob();
+        return await new Promise(function(myResolve) {
+          var myReader = new FileReader();
+          myReader.onloadend = function() { myResolve(myReader.result); };
+          myReader.readAsDataURL(myBlob);
+        });
+      } catch(e) {
+        console.log('Fetch error:', myAbsUrl, e);
+        // ── Fallback: draw image via canvas to get base64 ──
+        // This works for same-origin images even when fetch is blocked
+        return await myCanvasBase64(myAbsUrl);
+      }
+    }
+
+    // ── Fallback: load image into a canvas and export as PNG base64 ──
+    async function myCanvasBase64(myAbsUrl) {
+      return await new Promise(function(myResolve) {
+        var myImg = new Image();
+        myImg.crossOrigin = 'anonymous';
+        myImg.onload = function() {
+          try {
+            var myCanvas = document.createElement('canvas');
+            myCanvas.width  = myImg.naturalWidth  || myImg.width  || 300;
+            myCanvas.height = myImg.naturalHeight || myImg.height || 200;
+            var myCtx = myCanvas.getContext('2d');
+            myCtx.drawImage(myImg, 0, 0);
+            myResolve(myCanvas.toDataURL('image/png'));
+          } catch(e) {
+            console.log('Canvas export failed:', myAbsUrl, e);
+            myResolve(null);
+          }
+        };
+        myImg.onerror = function() {
+          console.log('Image load error:', myAbsUrl);
+          myResolve(null);
+        };
+        // Add cache-busting param to encourage CORS headers on some servers
+        myImg.src = myAbsUrl + (myAbsUrl.includes('?') ? '&' : '?') + '_cb=' + Date.now();
+      });
+    }
+
+    // ── Helper: guess image extension from URL ──
+    function myImageExt(mySrc) {
+      var myS = (mySrc || '').toLowerCase().split('?')[0];
+      if (myS.endsWith('.jpg') || myS.endsWith('.jpeg')) { return 'jpg'; }
+      if (myS.endsWith('.gif'))  { return 'gif';  }
+      if (myS.endsWith('.webp')) { return 'webp'; }
+      return 'png';
+    }
+
+    // ── Helper: extract YouTube video ID from thumbnail URL ──
+    function myYouTubeId(mySrc) {
+      var myMatch = (mySrc || '').match(/\/vi\/([^\/]+)\//);
+      return myMatch ? myMatch[1] : null;
+    }
+
+    // ── Helper: convert <table> element to pptxgenjs rows array ──
+    function myTableToRows(myTableEl) {
+      var myRows = [];
+      myTableEl.querySelectorAll('tr').forEach(function(myTr) {
+        var myRow = [];
+        myTr.querySelectorAll('th, td').forEach(function(myCell) {
+          var myIsHeader = (myCell.tagName === 'TH');
+          myRow.push({
+            text: myCell.innerText.trim(),
+            options: {
+              bold:     myIsHeader,
+              fontSize: myIsHeader ? 10 : 9,
+              fill:     { color: myIsHeader ? '2E75B6' : 'FFFFFF' },
+              color:    myIsHeader ? 'FFFFFF' : '000000',
+              align:    'left',
+              valign:   'middle'
+            }
+          });
+        });
+        if (myRow.length > 0) { myRows.push(myRow); }
+      });
+      return myRows;
+    }
+
+    // ── Find all slide <h3> elements (those containing a named anchor) ──
+    var myH3List = Array.from(document.querySelectorAll('h3')).filter(function(myH3) {
+      return myH3.querySelector('a[name]') !== null;
+    });
+
+    for (var myIdx = 0; myIdx < myH3List.length; myIdx++) {
+
+      var myH3        = myH3List[myIdx];
+      var mySlideLabel = myH3.innerText.trim();
+
+      // ── Walk siblings until next <h3> collecting all elements ──
+      var myH2        = null;
+      var myImgEl     = null;
+      var myDetailsEl = null;
+      var myTableEl   = null;
+      var myYtIds     = [];
+
+      var mySib = myH3.nextElementSibling;
+      while (mySib) {
+        // Stop at the next slide's h3
+        if (mySib.tagName === 'H3' && mySib.querySelector('a[name]')) { break; }
+
+        if (mySib.tagName === 'H2' && !myH2) {
+          myH2 = mySib;
+        }
+
+        else if (mySib.tagName === 'IMG') {
+          var myYtId = myYouTubeId(mySib.src);
+          if (myYtId) {
+            if (!myYtIds.includes(myYtId)) { myYtIds.push(myYtId); }
+          } else if (!myImgEl) {
+            myImgEl = mySib;
+          }
+        }
+
+        else if (mySib.tagName === 'DETAILS' && !myDetailsEl) {
+          myDetailsEl = mySib;
+          if (!myTableEl) {
+            var myInnerTable = mySib.querySelector('table');
+            if (myInnerTable) { myTableEl = myInnerTable; }
+          }
+        }
+
+        else if (mySib.tagName === 'TABLE' && !myTableEl) {
+          myTableEl = mySib;
+        }
+
+        else if (mySib.tagName === 'DIV') {
+          // Video player divs — find YouTube thumbnails inside
+          mySib.querySelectorAll('img').forEach(function(myDivImg) {
+            var myDivYtId = myYouTubeId(myDivImg.src);
+            if (myDivYtId) {
+              if (!myYtIds.includes(myDivYtId)) { myYtIds.push(myDivYtId); }
+            } else if (!myImgEl) {
+              myImgEl = myDivImg;
+            }
+          });
+        }
+
+        mySib = mySib.nextElementSibling;
+      }
+
+      // ── Extract text content ──
+      var mySlideTitle  = myH2 ? myH2.innerText.trim() : '';
+      var mySummaryText = '';
+      var myNotesText   = '';
+
+      if (myDetailsEl) {
+        var mySummaryEl = myDetailsEl.querySelector('summary');
+        if (mySummaryEl) { mySummaryText = mySummaryEl.innerText.trim(); }
+        var myClone = myDetailsEl.cloneNode(true);
+        var myCloneSummary = myClone.querySelector('summary');
+        if (myCloneSummary) { myCloneSummary.remove(); }
+        var myCloneTable = myClone.querySelector('table');
+        if (myCloneTable) { myCloneTable.remove(); }
+        myNotesText = myClone.innerText.trim();
+      }
+
+      // ── Fetch image ──
+      var myImageData = null;
+      var myImageExtStr = 'png';
+      if (myImgEl) {
+        // Use the browser-resolved .src (always absolute) not the HTML attribute
+        var myResolvedSrc = myImgEl.src;
+        console.log('Slide ' + (myIdx+1) + ' image src resolved to: ' + myResolvedSrc);
+        myImageData   = await myFetchImageBase64(myResolvedSrc);
+        myImageExtStr = myImageExt(myResolvedSrc);
+      }
+
+      // ── Layout ──
+      var myHasImage = (myImageData !== null);
+      var myTextW    = myHasImage ? 5.6 : 9.2;
+
+      // ── Build slide ──
+      var mySlide = pptx.addSlide();
+      mySlide.background = { color: '87CEEB' };
+
+      // Slide label
+      mySlide.addText(mySlideLabel, {
+        x: 0.3, y: 0.05, w: 9.2, h: 0.3,
+        fontSize: 10, color: '333333', fontFace: 'Courier New'
+      });
+
+      // Title
+      if (mySlideTitle) {
+        mySlide.addText(mySlideTitle, {
+          x: 0.3, y: 0.4, w: myTextW, h: 2.0,
+          fontSize: 22, bold: true, color: '000000',
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Summary bold intro
+      if (mySummaryText) {
+        mySlide.addText(mySummaryText, {
+          x: 0.3, y: 2.5, w: myTextW, h: 0.9,
+          fontSize: 14, bold: true, color: '1a1a1a',
+          valign: 'top', wrap: true
+        });
+      }
+
+      // Video-only label
+      if (!mySlideTitle && !mySummaryText && myYtIds.length > 0) {
+        mySlide.addText('Video Demo — see link below', {
+          x: 0.3, y: 0.4, w: 9.2, h: 0.7,
+          fontSize: 20, italic: true, color: '444444'
+        });
+      }
+
+      // YouTube links as clickable text on slide
+      myYtIds.forEach(function(myId, myI) {
+        var myUrl = 'https://www.youtube.com/watch?v=' + myId;
+        mySlide.addText('▶  Watch: ' + myUrl, {
+          x: 0.3, y: 1.3 + (myI * 0.6), w: 9.0, h: 0.5,
+          fontSize: 14, color: '0563C1',
+          hyperlink: { url: myUrl }
+        });
+      });
+
+      // Image — right column, contain scaling
+      if (myHasImage) {
+        mySlide.addImage({
+          data:   myImageData,
+          x:      6.0,
+          y:      0.4,
+          w:      3.7,
+          h:      4.9,
+          sizing: { type: 'contain', w: 3.7, h: 4.9 }
+        });
+      }
+
+      // Table
+      if (myTableEl) {
+        var myRows = myTableToRows(myTableEl);
+        if (myRows.length > 0) {
+          mySlide.addTable(myRows, {
+            x: 0.3, y: 3.55, w: 9.2,
+            fontSize: 9,
+            border: { type: 'solid', color: '888888', pt: 0.5 },
+            autoPage: false
+          });
+        }
+      }
+
+      // Speaker notes
+      var myFullNotes = '';
+      if (mySummaryText) { myFullNotes += mySummaryText + '\n\n'; }
+      if (myNotesText)   { myFullNotes += myNotesText + '\n\n'; }
+      myYtIds.forEach(function(myId) {
+        myFullNotes += 'YouTube: https://www.youtube.com/watch?v=' + myId + '\n';
+      });
+      if (myFullNotes.trim()) { mySlide.addNotes(myFullNotes.trim()); }
+
+    } // end for each slide
+
+    // ── Final links slide ──
+    var myFooterSlide = pptx.addSlide();
+    myFooterSlide.background = { color: '87CEEB' };
+    myFooterSlide.addText('Jeremy Ellis — AI for Good Geneva 2026', {
+      x: 0.4, y: 0.3, w: 9.2, h: 0.55,
+      fontSize: 22, bold: true, color: '000000'
+    });
+    myFooterSlide.addText(
+      'Presentation:\nhttps://hpssjellis.github.io/j-ellis-geneva-2026-ai-for-good-conference-presentation/index.html\n\n' +
+      'Course:     github.com/hpssjellis/maker100-leaders-robotics\n' +
+      'WebMCU-AI:  github.com/webmcu-ai\n' +
+      'arXiv:      2604.23012  ·  2604.22834\n' +
+      'LinkedIn:   jeremy-ellis-4237a9bb',
+      {
+        x: 0.4, y: 1.0, w: 9.2, h: 4.2,
+        fontSize: 14, color: '111111',
+        valign: 'top', wrap: true
+      }
+    );
+
+    pptx.writeFile({ fileName: 'maker100-leaders-robotics-geneva2026.pptx' });
+
+  } // end myExportPptx
+  
+</script>
+
+</body>
+</html>
