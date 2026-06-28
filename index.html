@@ -672,8 +672,6 @@ function openAllDetails() {
 
 
 
-
-
 async function myExportPptx() {
 
     var pptx = new PptxGenJS();
@@ -684,14 +682,12 @@ async function myExportPptx() {
     // ── Helper: resolve any src to an absolute URL then fetch as base64 ──
     async function myFetchImageBase64(mySrc) {
       if (!mySrc) { return null; }
-      // Resolve relative paths against the page's own URL
       var myAbsUrl = '';
       try {
         myAbsUrl = new URL(mySrc, window.location.href).href;
       } catch(e) {
         myAbsUrl = mySrc;
       }
-      // Skip YouTube thumbnails
       if (myAbsUrl.includes('ytimg.com'))   { return null; }
       if (myAbsUrl.includes('youtube.com')) { return null; }
       console.log('Fetching image:', myAbsUrl);
@@ -709,8 +705,6 @@ async function myExportPptx() {
         });
       } catch(e) {
         console.log('Fetch error:', myAbsUrl, e);
-        // ── Fallback: draw image via canvas to get base64 ──
-        // This works for same-origin images even when fetch is blocked
         return await myCanvasBase64(myAbsUrl);
       }
     }
@@ -737,7 +731,6 @@ async function myExportPptx() {
           console.log('Image load error:', myAbsUrl);
           myResolve(null);
         };
-        // Add cache-busting param to encourage CORS headers on some servers
         myImg.src = myAbsUrl + (myAbsUrl.includes('?') ? '&' : '?') + '_cb=' + Date.now();
       });
     }
@@ -800,7 +793,6 @@ async function myExportPptx() {
 
       var mySib = myH3.nextElementSibling;
       while (mySib) {
-        // Stop at the next slide's h3
         if (mySib.tagName === 'H3' && mySib.querySelector('a[name]')) { break; }
 
         if (mySib.tagName === 'H2' && !myH2) {
@@ -829,7 +821,6 @@ async function myExportPptx() {
         }
 
         else if (mySib.tagName === 'DIV') {
-          // Video player divs — find YouTube thumbnails inside
           mySib.querySelectorAll('img').forEach(function(myDivImg) {
             var myDivYtId = myYouTubeId(myDivImg.src);
             if (myDivYtId) {
@@ -859,35 +850,72 @@ async function myExportPptx() {
         myNotesText = myClone.innerText.trim();
       }
 
-      // ── Fetch image ──
-      var myImageData = null;
+      // ── Fetch image AND measure its natural dimensions ──
+      var myImageData   = null;
       var myImageExtStr = 'png';
+      var myImgNaturalW = 0;
+      var myImgNaturalH = 0;
+
       if (myImgEl) {
-        // Use the browser-resolved .src (always absolute) not the HTML attribute
         var myResolvedSrc = myImgEl.src;
         console.log('Slide ' + (myIdx+1) + ' image src resolved to: ' + myResolvedSrc);
         myImageData   = await myFetchImageBase64(myResolvedSrc);
         myImageExtStr = myImageExt(myResolvedSrc);
+        // Read natural dimensions — browser has already loaded the image at 500px wide
+        myImgNaturalW = myImgEl.naturalWidth  || myImgEl.width  || 500;
+        myImgNaturalH = myImgEl.naturalHeight || myImgEl.height || 400;
       }
 
-      // ── Layout ──
+      // ── Layout: image dominates, text wraps into remaining left space ──
       var myHasImage = (myImageData !== null);
-      var myTextW    = myHasImage ? 5.6 : 9.2;
+
+      var SLIDE_W    = 10.0;   // inches (16x9 layout)
+      var SLIDE_H    =  5.63;  // inches
+      var IMG_GAP    =  0.15;  // gap between text column and image edge
+      var LEFT_EDGE  =  0.3;   // left margin for text
+      var TOP_MARGIN =  0.05;  // top margin for image
+
+      var myImgW = 0, myImgH = 0, myImgX = 0, myImgY = 0, myTextW = 0;
+
+      if (myHasImage && myImgNaturalW > 0 && myImgNaturalH > 0) {
+        var myAspect = myImgNaturalW / myImgNaturalH;
+
+        // Start by filling the full slide height
+        myImgH = SLIDE_H - TOP_MARGIN * 2;
+        myImgW = myImgH * myAspect;
+
+        // Cap image width at 62% of slide so text always has room
+        var myMaxImgW = SLIDE_W * 0.62;
+        if (myImgW > myMaxImgW) {
+          myImgW = myMaxImgW;
+          myImgH = myImgW / myAspect;
+        }
+
+        // Place image flush right, vertically centred
+        myImgX = SLIDE_W - myImgW - 0.05;
+        myImgY = (SLIDE_H - myImgH) / 2;
+
+        // Text column fills everything left of the image
+        myTextW = myImgX - LEFT_EDGE - IMG_GAP;
+      } else {
+        // No image — text fills the whole slide
+        myTextW = SLIDE_W - LEFT_EDGE - 0.3;
+      }
 
       // ── Build slide ──
       var mySlide = pptx.addSlide();
       mySlide.background = { color: '87CEEB' };
 
-      // Slide label
+      // Slide label (small, top-left)
       mySlide.addText(mySlideLabel, {
-        x: 0.3, y: 0.05, w: 9.2, h: 0.3,
+        x: LEFT_EDGE, y: 0.05, w: myTextW, h: 0.3,
         fontSize: 10, color: '333333', fontFace: 'Courier New'
       });
 
       // Title
       if (mySlideTitle) {
         mySlide.addText(mySlideTitle, {
-          x: 0.3, y: 0.4, w: myTextW, h: 2.0,
+          x: LEFT_EDGE, y: 0.4, w: myTextW, h: 2.0,
           fontSize: 22, bold: true, color: '000000',
           valign: 'top', wrap: true
         });
@@ -896,7 +924,7 @@ async function myExportPptx() {
       // Summary bold intro
       if (mySummaryText) {
         mySlide.addText(mySummaryText, {
-          x: 0.3, y: 2.5, w: myTextW, h: 0.9,
+          x: LEFT_EDGE, y: 2.5, w: myTextW, h: 0.9,
           fontSize: 14, bold: true, color: '1a1a1a',
           valign: 'top', wrap: true
         });
@@ -905,7 +933,7 @@ async function myExportPptx() {
       // Video-only label
       if (!mySlideTitle && !mySummaryText && myYtIds.length > 0) {
         mySlide.addText('Video Demo — see link below', {
-          x: 0.3, y: 0.4, w: 9.2, h: 0.7,
+          x: LEFT_EDGE, y: 0.4, w: myTextW, h: 0.7,
           fontSize: 20, italic: true, color: '444444'
         });
       }
@@ -914,30 +942,30 @@ async function myExportPptx() {
       myYtIds.forEach(function(myId, myI) {
         var myUrl = 'https://www.youtube.com/watch?v=' + myId;
         mySlide.addText('▶  Watch: ' + myUrl, {
-          x: 0.3, y: 1.3 + (myI * 0.6), w: 9.0, h: 0.5,
+          x: LEFT_EDGE, y: 1.3 + (myI * 0.6), w: myTextW, h: 0.5,
           fontSize: 14, color: '0563C1',
           hyperlink: { url: myUrl }
         });
       });
 
-      // Image — right column, contain scaling
+      // Image — right column, natural aspect ratio
       if (myHasImage) {
         mySlide.addImage({
           data:   myImageData,
-          x:      6.0,
-          y:      0.4,
-          w:      3.7,
-          h:      4.9,
-          sizing: { type: 'contain', w: 3.7, h: 4.9 }
+          x:      myImgX,
+          y:      myImgY,
+          w:      myImgW,
+          h:      myImgH,
+          sizing: { type: 'contain', w: myImgW, h: myImgH }
         });
       }
 
-      // Table
+      // Table (placed below text, within text column width)
       if (myTableEl) {
         var myRows = myTableToRows(myTableEl);
         if (myRows.length > 0) {
           mySlide.addTable(myRows, {
-            x: 0.3, y: 3.55, w: 9.2,
+            x: LEFT_EDGE, y: 3.55, w: myTextW,
             fontSize: 9,
             border: { type: 'solid', color: '888888', pt: 0.5 },
             autoPage: false
