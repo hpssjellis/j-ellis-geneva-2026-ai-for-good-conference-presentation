@@ -887,7 +887,8 @@ async function myExportPptx() {
 ////////////////////////////////////////// DEFINES HOW BIG THE IMAGE IS ON THE SLIDE //////////////////////////////////////////////////////////////
         
         // Cap image width at 62% of slide so text always has room
-        var myMaxImgW = SLIDE_W * 0.62;
+       // var myMaxImgW = SLIDE_W * 0.62;  // original
+        var myMaxImgW = SLIDE_W * 0.70;
         if (myImgW > myMaxImgW) {
           myImgW = myMaxImgW;
           myImgH = myImgW / myAspect;
